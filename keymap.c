@@ -21,7 +21,7 @@
 #include "keymap_hungarian.h"
 
 enum layers {
-    _QWERTY,
+    _QWERTZ,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -32,89 +32,89 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* QWERTY
- * ,-------------------------------------------.                    ,-------------------------------------------.
- * |   Esc  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  Esc   |
- * |--------+------+------+------+------+------|                    |------+------+------+------+------+--------|
- * |   Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Z  |   U  |   I  |   O  |   P  |  Tab   |
- * |--------+------+------+------+------+------| SCR V        VOL+- |------+------+------+------+------+--------|
- * | LShift |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  | RShift |
- * |--------+------+------+------+------+------| PLAY  |    |  MUTE |------+------+------+------+------+--------|
- * |  LCtrl |   Y  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   -  | RCtrl  |
- * `-------------------------------------------|       /     \      \-------------------------------------------'
- *                 |  Esc | LGUI | LAlt |LOWER| Space /       \Enter \  |RAISE |BackSP| AltGr | RGUI |
- *                 `----------------------------------'       '--------------------------------------'
+/* QWERTZ
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │  Esc │   1  │   2  │   3  │   4  │   5  │                  │   6  │   7  │   8  │   9  │   0  │ Esc  │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │  Tab │   Q  │   W  │   E  │   R  │   T  │                  │   Z  │   U  │   I  │   O  │   P  │ Tab  │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │   ⇧  ┃   A  ┃   S  ┃   D  ┃   F  ┃   G  │ Scl↕        VOL  │   H  ┃   J  ┃   K  ┃   L  ┃BackSp┃   ⇧  │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │   ⎈  │   Y  │   X  │   C  │   V  │   B  │╵Play╵      ╵Mute╵│   N  │   M  │   ,  │   .  │   -  │   ⎈  │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │   ◆  │   ⌥  │Delete│   ▼  ╷Space │    │Enter ╷   ▲  │BackSp│ AltGr│   ◆  │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
- [_QWERTY] = LAYOUT(
-    KC_ESC,  HU_1, HU_2, HU_3, HU_4, HU_5,                         HU_6, HU_7, HU_8, HU_9, HU_0, KC_ESC,
-    KC_TAB,  HU_Q, HU_W, HU_E, HU_R, HU_T,                         HU_Z, HU_U, HU_I, HU_O, HU_P, KC_TAB,
-    KC_LSFT, HU_A, HU_S, HU_D, HU_F, HU_G,                         HU_H, HU_J, HU_K, HU_L, HU_SCLN, KC_RSFT,
-    KC_LCTL, HU_Y, HU_X, HU_C, HU_V, HU_B, KC_MPLY,       KC_MUTE, HU_N, HU_M, HU_COMM, HU_DOT, HU_MINS, KC_RCTL,
-    KC_ESC, KC_LGUI, KC_LALT, LT(LOWER, KC_SPC), KC_SPC,  KC_ENT, LT(RAISE, KC_SPC), KC_BSPC, KC_RALT, KC_RGUI
+ [_QWERTZ] = LAYOUT(
+    KC_ESC,  HU_1, HU_2, HU_3, HU_4, HU_5,                      HU_6, HU_7, HU_8, HU_9, HU_0, KC_ESC,
+    KC_TAB,  HU_Q, HU_W, HU_E, HU_R, HU_T,                      HU_Z, HU_U, HU_I, HU_O, HU_P, KC_TAB,
+    KC_LSFT, HU_A, HU_S, HU_D, HU_F, HU_G,                      HU_H, HU_J, HU_K, HU_L, KC_BSPC, KC_RSFT,
+    KC_LCTL, HU_Y, HU_X, HU_C, HU_V, HU_B, KC_MPLY,    KC_MUTE, HU_N, HU_M, HU_COMM, HU_DOT, HU_MINS, KC_RCTL,
+          KC_LGUI, KC_LALT, KC_DEL,  LOWER, KC_SPC,    KC_ENT, RAISE, KC_BSPC, KC_RALT, KC_RGUI
 ),
 /* LOWER
- * ,-------------------------------------------.                    ,-----------------------------------------.
- * |   F12  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
- * |--------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |        |   \  |   |  |   É  |   &  |   /  |                    |      |   Ú  |   Í  |   Ó  |   +  |      |
- * |--------+------+------+------+------+------| SCR H       STEP W |------+------+------+------+------+------|
- * |   `    |   Á  |   $  |   [  |   ]  |   '  |-------.    ,-------|   "  |   (  |   )  |   {  |   }  |      |
- * |--------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |        |      |   #  |   <  |   >  |   @  |-------|    |-------|      |   =  |   ;  |   %  |   *  |      |
- * `-------------------------------------------|       /     \      \-----------------------------------------'
- *                 |      |      |      |LOWER|       /       \ Esc  \  |RAISE |Delete|       | Menu |
- *                 `----------------------------------'       '--------------------------------------'
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │      │   \  │   |  │   É  │   &  │   /  │                  │   !  │   Ú  │   Í  │   Ó  │   +  │      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │   `  ┃   Á  ┃   $  ┃   [  ┃   ]  ┃   '  │ Scl↔        Word │   "  ┃   (  ┃   )  ┃   {  ┃   }  ┃      │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│   ~  │   =  │   ;  │   %  │   *  │      │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │      │      │      │      ╷      │    │ Esc  │      │Delete│      │ Menu │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
 [_LOWER] = LAYOUT(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_AMPR, HU_SLSH,                   _______, HU_UACU, HU_IACU, HU_OACU, HU_PLUS, _______,
     HU_GRV,  HU_AACU, HU_DLR,  HU_LBRC, HU_RBRC, HU_QUOT,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_LCBR, HU_RCBR, _______,
-    _______, _______, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, HU_EQL,  HU_SCLN, HU_PERC, HU_ASTR, _______,
+    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, HU_TILD, HU_EQL,  HU_SCLN, HU_PERC, HU_ASTR, _______,
                       _______, _______, _______, _______, _______, KC_ESC,  _______, KC_DEL,  _______, KC_MENU
 ),
 /* RAISE
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      | Help |      |      |      |Insert|                    |      |PrtScr|ScrLk |PauBrk|      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | PgUp |      |  Up  | Redo | Home |                    | Undo |   Ü  | M  ↑ |   Ö  |      |      |
- * |------+-------+-----+------+------+------|                    |------+------+------+------+------+------|
- * |      | PgDn | Left | Down | Right| End  |-------.    ,-------|  LMB | M  ← | M  ↓ | M  → | RMB  | MMB  |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      | Cut  | Copy | Paste|      |-------|    |-------|      | Left | Down |  Up  |Right |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                 |    |      |      |LOWER| Delete/       \      \  |RAISE |Delete|       | Menu |
- *                 `--------------------------------'       '--------------------------------------'
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │      │ Help │Insert│      │      │      │                  │CapsLk│PrtScr│ScrLk │PauBrk│      │      │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │   Ü  │ M  ↑ │   Ö  │ MMB  │      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │RGB VAL    RGB HUE│  LMB ┃ M  ← ┃ M  ↓ ┃ M  → ┃ RMB  ┃      │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │      │      │      │      │      │      │╵    ╵      ╵    ╵│      │ Left │ Down │  Up  │Right │      │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
 [_RAISE] = LAYOUT(
-    _______, KC_HELP, _______, _______, _______, KC_INS,                      _______, KC_PSCR, KC_SLCK, KC_PAUS, _______, _______,
-    _______, KC_PGUP, _______, KC_UP,   KC_AGIN, KC_HOME,                     KC_UNDO, HU_UDIA, KC_MS_U, HU_ODIA, _______, _______,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,                      KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN2, KC_BTN3,
-    _______, _______, KC_CUT,  KC_COPY, KC_PSTE, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-                      _______, _______, _______, KC_DEL,   _______, _______,  _______, KC_DEL,  _______, KC_MENU
+    _______, KC_HELP, KC_INS,  _______, _______, _______,                     KC_CLCK, KC_PSCR, KC_SLCK, KC_PAUS, _______, _______,
+    _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, HU_UDIA, KC_MS_U, HU_ODIA, KC_BTN3, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN2, _______,
+    _______, _______, _______, _______, _______, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+                      _______, _______, _______, KC_DEL,   _______, _______,  _______, _______, _______, _______
 ),
 /* ADJUST (Press LOWER and RAISE together)
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |RESET |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |RGB ON| HUE+ | SAT+ | VAL+ |      |      |                    |      |   Ű  |      |   Ő  |      |      |
- * |------+------+------+------+------+------| RGB VAL    RGB HUE |------+------+------+------+------+------|
- * | MODE | HUE- | SAT- | VAL- |      | Sleep|-------.    ,-------| MUTE | Prev | VOL- | VOL+ | Next |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------| Stop | Rwnd |      |      | Ffwd |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                 |    |      |      |     |       /       \      \  |      |      |       |      |
- *                 `--------------------------------'       '--------------------------------------'
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │RESET │      │      │      │      │      │                  │      │      │      │      │      │      │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │ Eject│                  │      │   Ű  │      │   Ő  │      │      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃ Sleep│                  │ MUTE ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │      │      │      │      │      │      │╵    ╵      ╵    ╵│ Stop │ Rwnd │      │      │ Ffwd │      │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
 [_ADJUST] = LAYOUT(
     RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                   XXXXXXX, HU_UDAC, XXXXXXX, HU_ODAC, XXXXXXX, XXXXXXX,
-    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, KC_SLEP,                   KC_MUTE, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
+    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, KC_EJCT,                   XXXXXXX, HU_UDAC, XXXXXXX, HU_ODAC, XXXXXXX, XXXXXXX,
+    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, KC_SLEP,                   KC_MUTE, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MSTP, KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD, XXXXXXX,
-                      _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   )
 };
 
@@ -336,11 +336,10 @@ void oled_task_user(void) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    // Encoder on master side
+    // Left encoder
     if (index == 0) {
         switch (get_highest_layer(layer_state)) {
-            // If the Default (QWERTY) layer is active
-            case _QWERTY:
+            case _QWERTZ:
                 // Mouse scroll Up/Down
                 if (clockwise) {
                     tap_code(KC_WH_D);
@@ -349,7 +348,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
 
-            // If the RAISE layer is active
             case _LOWER:
                 // Mouse scroll Right/Left
                 if (clockwise) {
@@ -358,23 +356,22 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_WH_L);
                 }
                 break;
-            // If the ADJUST layer is active
-            case _ADJUST:
+            
+            case _RAISE:
                 // RGB brightness up/down
                 if (clockwise) {
-                    rgblight_decrease_val(); // tap_code(RGB_VAD);
+                    rgblight_decrease_val();
                 } else {
-                    rgblight_increase_val(); // tap_code(RGB_VAI);
+                    rgblight_increase_val();
                 }
                 break;
         }
     }
-    // Encoder on slave side
+    // Right encoder
     else if (index == 1) {
         switch (get_highest_layer(layer_state)) {
-            // If the Default (QWERTY) layer is active
-            case _QWERTY:
-                // Volume up/down
+            case _QWERTZ:
+                // Volume Up/Down
                 if (clockwise) {
                     tap_code(KC_VOLU);
                 } else {
@@ -382,7 +379,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
 
-            // If the LOWER layer is active
             case _LOWER:
 
                 // Scroll by Word
@@ -393,14 +389,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
 
-            // If the ADJUST layer is active
-            case _ADJUST:
-                // RGB hue up/down
+            case _RAISE:
+                // RGB hue Up/Down
                 if (clockwise) {
-                    // tap_code(RGB_HUI);
                     rgblight_increase_hue();
                 } else {
-                    // tap_code(RGB_HUD);
                     rgblight_decrease_hue();
                 }
                 break;
