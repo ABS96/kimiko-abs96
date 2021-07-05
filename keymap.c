@@ -343,9 +343,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             case _QWERTY:
                 // Mouse scroll Up/Down
                 if (clockwise) {
-                    tap_code(KC_WH_U);
-                } else {
                     tap_code(KC_WH_D);
+                } else {
+                    tap_code(KC_WH_U);
                 }
                 break;
 
