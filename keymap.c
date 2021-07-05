@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                    |------+------+------+------+------+--------|
  * |   Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Z  |   U  |   I  |   O  |   P  |  Tab   |
  * |--------+------+------+------+------+------| SCR V        VOL+- |------+------+------+------+------+--------|
- * | LShift |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  | ⎈(J) | ⇧(K) | ⎇(L) | ◆(;) | RShift |
+ * | LShift |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  | RShift |
  * |--------+------+------+------+------+------| PLAY  |    |  MUTE |------+------+------+------+------+--------|
  * |  LCtrl |   Y  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   -  | RCtrl  |
  * `-------------------------------------------|       /     \      \-------------------------------------------'
@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT(
     KC_ESC,  HU_1, HU_2, HU_3, HU_4, HU_5,                         HU_6, HU_7, HU_8, HU_9, HU_0, KC_ESC,
     KC_TAB,  HU_Q, HU_W, HU_E, HU_R, HU_T,                         HU_Z, HU_U, HU_I, HU_O, HU_P, KC_TAB,
-    KC_LSFT, HU_A, HU_S, HU_D, HU_F, HU_G,                         HU_H, RCTL_T(HU_J), RSFT_T(HU_K), LALT_T(HU_L), LGUI_T(HU_SCLN), KC_RSFT,
+    KC_LSFT, HU_A, HU_S, HU_D, HU_F, HU_G,                         HU_H, HU_J, HU_K, HU_L, HU_SCLN, KC_RSFT,
     KC_LCTL, HU_Y, HU_X, HU_C, HU_V, HU_B, KC_MPLY,       KC_MUTE, HU_N, HU_M, HU_COMM, HU_DOT, HU_MINS, KC_RCTL,
     KC_ESC, KC_LGUI, KC_LALT, LT(LOWER, KC_SPC), KC_SPC,  KC_ENT, LT(RAISE, KC_SPC), KC_BSPC, KC_RALT, KC_RGUI
 ),
