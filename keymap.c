@@ -271,6 +271,7 @@ void render_mod_status_ctrl_shift(uint8_t modifiers) {
 
 void render_logo(void) {
     static const char PROGMEM corne_logo[] = {
+        0x80, 0x81, 0x82, 0x83, 0x84,
         0xA0, 0xA1, 0xA2, 0xA3, 0xA4,
         0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0};
     oled_write_P(corne_logo, false);
@@ -307,7 +308,6 @@ void render_layer_state(void) {
 
 void render_status_main(void) {
     render_space();
-    render_space();
     render_logo();
     render_space();
     render_layer_state();
@@ -317,7 +317,6 @@ void render_status_main(void) {
 }
 
 void render_status_secondary(void) {
-    render_space();
     render_space();
     render_logo();
     render_space();
