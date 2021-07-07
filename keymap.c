@@ -17,7 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef __INTELLISENSE__
 #include QMK_KEYBOARD_H
+#endif
 #include "keymap_hungarian.h"
 
 enum layers {

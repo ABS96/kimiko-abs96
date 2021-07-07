@@ -25,14 +25,15 @@
 #define OLED_FONT_H "keyboards/keycapsss/kimiko/keymaps/ABS96/glcdfont.c"
 // #define OLED_FONT_WIDTH 5
 // #define OLED_FONT_HEIGHT 7
+#define OLED_BRIGHTNESS 100 // 0-255
 
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_HUE_STEP 8
-#    define RGBLIGHT_SAT_STEP 8
-#    define RGBLIGHT_VAL_STEP 8
-#    define RGBLIGHT_SLEEP /* the RGB lighting will be switched off when the host goes to sleep */
+#define RGBLIGHT_HUE_STEP 8
+#define RGBLIGHT_SAT_STEP 8
+#define RGBLIGHT_VAL_STEP 8
+#define RGBLIGHT_SLEEP /* the RGB lighting will be switched off when the host goes to sleep */
 /*== all animations enable ==*/
-#    define RGBLIGHT_ANIMATIONS
+#define RGBLIGHT_ANIMATIONS
 /*== or choose animations to save space ==*/
 // #   define RGBLIGHT_EFFECT_BREATHING
 // #   define RGBLIGHT_EFFECT_RAINBOW_MOOD
