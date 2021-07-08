@@ -24,13 +24,30 @@
 
 enum layers {
     _QWERTZ,
+    // _GAMING,
     _LOWER,
     _RAISE,
     _ADJUST,
+    _NUMBER,
+    _FUNCTION
 };
 
+#define BASE TO(_QWERTZ)
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
+#define ADJUST MO(_ADJUST)
+#define NUMBER TG(_NUMBER)
+#define FUNCT OSL(_FUNCTION)
+// #define GAMING TG(_GAMING)
+
+// #define HM_GUIA MT(MOD_LGUI, HU_A)
+// #define HM_ALTS MT(MOD_LALT, HU_S)
+// #define HM_SFTD MT(MOD_LGUI, HU_D)
+// #define HM_CTLF MT(MOD_LCTL, HU_F)
+// #define HM_CTLJ MT(MOD_RCTL, HU_J)
+// #define HM_SFTK MT(MOD_RSFT, HU_K)
+// #define HM_ALTL MT(MOD_LALT, HU_L)
+// #define HM_GUIB MT(MOD_RGUI, KC_BSPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -44,37 +61,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │   ⎈  │   Y  │   X  │   C  │   V  │   B  │╵Play╵      ╵Mute╵│   N  │   M  │   ,  │   .  │   -  │   ⎈  │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │   ◆  │   ⌥  │Delete│   ▼  ╷Space │    │Enter ╷   ▲  │BackSp│ AltGr│   ◆  │
+ *               │   ◆  │   ⌥  │  NUM │   ▼  ╷Space │    │Enter ╷   ▲  │  FUN │   ⌥  │   ◆  │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
  [_QWERTZ] = LAYOUT(
-    KC_ESC,  HU_1, HU_2, HU_3, HU_4, HU_5,                      HU_6, HU_7, HU_8, HU_9, HU_0, KC_ESC,
-    KC_TAB,  HU_Q, HU_W, HU_E, HU_R, HU_T,                      HU_Z, HU_U, HU_I, HU_O, HU_P, KC_TAB,
-    KC_LSFT, HU_A, HU_S, HU_D, HU_F, HU_G,                      HU_H, HU_J, HU_K, HU_L, KC_BSPC, KC_RSFT,
-    KC_LCTL, HU_Y, HU_X, HU_C, HU_V, HU_B, KC_MPLY,    KC_MUTE, HU_N, HU_M, HU_COMM, HU_DOT, HU_MINS, KC_RCTL,
-          KC_LGUI, KC_LALT, KC_DEL,  LOWER, KC_SPC,    KC_ENT, RAISE, KC_BSPC, KC_RALT, KC_RGUI
+    KC_ESC,  HU_1,    HU_2,    HU_3,    HU_4,    HU_5,                      HU_6,    HU_7,    HU_8,    HU_9,    HU_0,    KC_ESC,
+    KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    KC_TAB,
+    KC_LSFT, HU_A,    HU_S,    HU_D,    HU_F,    HU_G,                      HU_H,    HU_J,    HU_K,    HU_L,    KC_BSPC, KC_RSFT,
+    // KC_LSFT, HM_GUIA, HM_ALTS, HM_SFTD, HM_CTLF, HU_G,                      HU_H,    HM_CTLJ, HM_SFTK, HM_ALTL, HM_GUIB, KC_RSFT,
+    KC_LCTL, HU_Y,    HU_X,    HU_C,    HU_V,    HU_B,    KC_MPLY, KC_MUTE, HU_N,    HU_M,    HU_COMM, HU_DOT,  HU_MINS, KC_RCTL,
+             KC_LGUI, KC_LALT, NUMBER,  LOWER,   KC_SPC,  KC_ENT,  RAISE,   FUNCT,   KC_LALT, KC_RGUI
 ),
+
 /* LOWER
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │   \  │   |  │   É  │   &  │   /  │                  │   !  │   Ú  │   Í  │   Ó  │   +  │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │   `  ┃   Á  ┃   $  ┃   [  ┃   ]  ┃   '  │ Scl↔        Word │   "  ┃   (  ┃   )  ┃   {  ┃   }  ┃      │
+ * │   `  ┃   Á  ┃   $  ┃   [  ┃   ]  ┃   '  │ Scl↔        Word │   "  ┃   (  ┃   )  ┃   =  ┃Delete┃   ;  │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│   ~  │   =  │   ;  │   %  │   *  │      │
+ * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│   ~  │   {  │   }  │   %  │   *  │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │ Esc  │      │Delete│      │ Menu │
+ *               │      │      │      │      ╷      │    │ Esc  │      │Delete│ AltGr│ Menu │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
 [_LOWER] = LAYOUT(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-    _______, HU_BSLS, HU_PIPE, HU_EACU, HU_AMPR, HU_SLSH,                   _______, HU_UACU, HU_IACU, HU_OACU, HU_PLUS, _______,
-    HU_GRV,  HU_AACU, HU_DLR,  HU_LBRC, HU_RBRC, HU_QUOT,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_LCBR, HU_RCBR, _______,
-    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, HU_TILD, HU_EQL,  HU_SCLN, HU_PERC, HU_ASTR, _______,
-                      _______, _______, _______, _______, _______, KC_ESC,  _______, KC_DEL,  _______, KC_MENU
+    _______, HU_BSLS, HU_PIPE, HU_EACU, HU_AMPR, HU_SLSH,                   HU_EXLM, HU_UACU, HU_IACU, HU_OACU, HU_PLUS, _______,
+    HU_GRV,  HU_AACU, HU_DLR,  HU_LBRC, HU_RBRC, HU_QUOT,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_EQL,  KC_DEL,  HU_SCLN,
+    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, _______,
+                      _______, _______, _______, _______, _______, KC_ESC,  _______, KC_DEL,  KC_RALT, KC_APP
 ),
 /* RAISE
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
@@ -95,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, HU_UDIA, KC_MS_U, HU_ODIA, KC_BTN3, _______,
     _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN2, _______,
     _______, _______, _______, _______, _______, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-                      _______, _______, _______, KC_DEL,   _______, _______,  _______, _______, _______, _______
+                      _______, _______, ADJUST,  KC_DEL,   _______, _______,  _______, _______, _______, _______
 ),
 /* ADJUST (Press LOWER and RAISE together)
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
@@ -103,9 +122,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │ Eject│                  │      │   Ű  │      │   Ő  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃ Sleep│                  │ MUTE ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
+ * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃      │                  │ MUTE ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │      │      │      │      │      │╵    ╵      ╵    ╵│ Stop │ Rwnd │      │      │ Ffwd │      │
+ * │      │      │      │ Sleep│      │      │╵    ╵      ╵    ╵│ Stop │ Rwnd │      │      │ Ffwd │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │      ╷      │    │      │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
@@ -114,16 +133,75 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT(
     RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, KC_EJCT,                   XXXXXXX, HU_UDAC, XXXXXXX, HU_ODAC, XXXXXXX, XXXXXXX,
-    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, KC_SLEP,                   KC_MUTE, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MSTP, KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD, XXXXXXX,
+    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   KC_MUTE, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MSTP, KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD, XXXXXXX,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-  )
+),
+/* NUMBER
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │      │      │      │      │      │      │                  │      │      │      │      │      │      │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │      │      │      │      │      │      │                  │      │      │      │      │      │      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │      ┃   1  ┃   2  ┃   3  ┃   4  ┃      │                  │      ┃   7  ┃   8  ┃   9  ┃   0  ┃      │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │      │      │      │      │   5  │      │╵    ╵      ╵    ╵│      │   6  │      │      │      │      │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
+ */
+
+[_NUMBER] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, HU_1,    HU_2,    HU_3,    HU_4,    _______,                   _______, HU_7,    HU_8,    HU_9,    HU_0,    _______,
+    _______, _______, _______, _______, HU_5,    _______, _______, _______, _______, HU_6,    _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  ),
+/* FUNCTION
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │      │      │      │      │      │      │                  │      │      │      │      │      │      │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │      │      │      │      │      │      │                  │      │      │      │      │      │      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │ F12  ┃  F1  ┃  F2  ┃  F3  ┃  F4  ┃      │                  │      ┃  F7  ┃  F8  ┃  F9  ┃ F10  ┃ F11  │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │      │      │      │      │  F5  │      │╵    ╵      ╵    ╵│      │  F6  │      │      │      │      │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
+ */
+
+[_FUNCTION] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,                   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    _______, _______, _______, _______, KC_F5,   _______, _______, _______, _______, KC_F6,   _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  ),
 };
 
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
     return state;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed){
+        // Turn off numbers layer automatically
+        if (IS_LAYER_ON(_NUMBER)) {
+            switch (keycode) {
+            case HU_0:
+            case HU_1 ... HU_9:
+                break;
+            default:
+                layer_off(_NUMBER);
+                break;
+            }
+        }
+    }
+    return true;
 }
 
 #ifdef OLED_DRIVER_ENABLE
@@ -316,6 +394,32 @@ void render_status_main(void) {
     render_space();
     render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
     render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
+    render_space();
+    switch(get_highest_layer(layer_state)) {
+        case _QWERTZ:
+            oled_write_P(PSTR(" BAS"), false);
+            break;
+        case _LOWER:
+            oled_write_P(PSTR(" LWR"), false);
+            break;
+        case _RAISE:
+            oled_write_P(PSTR(" RSE"), false);
+            break;
+        case _ADJUST:
+            oled_write_P(PSTR(" ADJ"), false);
+            break;
+        case _NUMBER:
+            oled_write_P(PSTR(" NUM"), false);
+            break;
+        case _FUNCTION:
+            oled_write_P(PSTR(" FUN"), false);
+            break;
+    }
+    // if (layer_state_is(_GAMING) == true) {
+    //     render_space(); 
+    //     oled_write_P(PSTR(" GAM"), false);
+    // }
+
 }
 
 void render_status_secondary(void) {
