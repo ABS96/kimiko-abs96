@@ -24,30 +24,56 @@
 
 enum layers {
     _QWERTZ,
-    // _GAMING,
-    _LOWER,
-    _RAISE,
+
+    _NAVIGATION,
+
+    _RSYM,
+    _LSYM,
+
     _ADJUST,
+
     _NUMBER,
-    _FUNCTION
+    _FUNCTION,
+    
+    _LMOD,
+    _RMOD,
 };
 
-#define BASE TO(_QWERTZ)
-#define RAISE MO(_RAISE)
-#define LOWER MO(_LOWER)
-#define ADJUST MO(_ADJUST)
-#define NUMBER TG(_NUMBER)
-#define FUNCT OSL(_FUNCTION)
-// #define GAMING TG(_GAMING)
+enum custom_keycodes {
+    OM_LSFT = SAFE_RANGE,
+    OM_LCTL,
+    OM_LALT,
+    OM_LGUI,
+    OM_RSFT,
+    OM_RCTL,
+    OM_RALT,
+    OM_RGUI,
+};
 
-// #define HM_GUIA MT(MOD_LGUI, HU_A)
-// #define HM_ALTS MT(MOD_LALT, HU_S)
-// #define HM_SFTD MT(MOD_LGUI, HU_D)
-// #define HM_CTLF MT(MOD_LCTL, HU_F)
-// #define HM_CTLJ MT(MOD_RCTL, HU_J)
-// #define HM_SFTK MT(MOD_RSFT, HU_K)
-// #define HM_ALTL MT(MOD_LALT, HU_L)
-// #define HM_GUIB MT(MOD_RGUI, KC_BSPC)
+uint16_t om_keycodes[] = {
+    KC_LSFT,
+    KC_LCTL,
+    KC_LALT,
+    KC_LGUI,
+    KC_RSFT,
+    KC_RCTL,
+    KC_RALT,
+    KC_RGUI
+};
+uint16_t om_count = 0;
+
+#define LAY_BAS TO(_QWERTZ)
+#define LAY_RSM MO(_RSYM)
+#define LAY_LSM MO(_LSYM)
+#define LAY_ADJ MO(_ADJUST)
+#define LAY_NUM MO(_NUMBER)
+#define LAY_FUN OSL(_FUNCTION)
+#define LAY_NAV LT(_NAVIGATION, KC_ENT)
+
+#define TAB_NXT C(KC_TAB)
+#define TAB_PRV S(C(KC_TAB))
+#define WRD_NXT C(KC_RIGHT)
+#define WRD_PRV C(KC_LEFT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -57,11 +83,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │  Tab │   Q  │   W  │   E  │   R  │   T  │                  │   Z  │   U  │   I  │   O  │   P  │ Tab  │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │   ⇧  ┃   A  ┃   S  ┃   D  ┃   F  ┃   G  │ Scl↕        VOL  │   H  ┃   J  ┃   K  ┃   L  ┃BackSp┃   ⇧  │
+ * │   ⇧  ┃   A  ┃   S  ┃   D  ┃   F  ┃   G  │ Scl↕        VOL↕ │   H  ┃   J  ┃   K  ┃   L  ┃BackSp┃   ⇧  │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │   ⎈  │   Y  │   X  │   C  │   V  │   B  │╵Play╵      ╵Mute╵│   N  │   M  │   ,  │   .  │   -  │   ⎈  │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │   ◆  │   ⌥  │  NUM │   ▼  ╷Space │    │Enter ╷   ▲  │  FUN │   ⌥  │   ◆  │
+ *               │   ◆  │   ⌥  │  NUM │ LMOD ╷Space │    │ NAV/⏎╷ RMOD │  FUN │   ⌥  │   ◆  │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
@@ -69,62 +95,94 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  HU_1,    HU_2,    HU_3,    HU_4,    HU_5,                      HU_6,    HU_7,    HU_8,    HU_9,    HU_0,    KC_ESC,
     KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    KC_TAB,
     KC_LSFT, HU_A,    HU_S,    HU_D,    HU_F,    HU_G,                      HU_H,    HU_J,    HU_K,    HU_L,    KC_BSPC, KC_RSFT,
-    // KC_LSFT, HM_GUIA, HM_ALTS, HM_SFTD, HM_CTLF, HU_G,                      HU_H,    HM_CTLJ, HM_SFTK, HM_ALTL, HM_GUIB, KC_RSFT,
     KC_LCTL, HU_Y,    HU_X,    HU_C,    HU_V,    HU_B,    KC_MPLY, KC_MUTE, HU_N,    HU_M,    HU_COMM, HU_DOT,  HU_MINS, KC_RCTL,
-             KC_LGUI, KC_LALT, NUMBER,  LOWER,   KC_SPC,  KC_ENT,  RAISE,   FUNCT,   KC_LALT, KC_RGUI
+             KC_LGUI, KC_LALT, LAY_NUM, LAY_RSM, KC_SPC,  LAY_NAV, LAY_LSM, LAY_FUN, KC_LALT, KC_RGUI
 ),
 
-/* LOWER
+/* NAVIGATION
+ * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
+ * │      │      │Insert│      │      │      │                  │CapsLk│PrtScr│  MMB │PauBrk│ ScrLk│      │
+ * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
+ * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Word↔            │      ┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
+ * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
+ * │      │ Word←│ Word→│ Tab← │ Tab→ │      │╵    ╵      ╵    ╵│      │ Left │ Down │  Up  │ Right│      │
+ * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
+ *               │      │      │      │      ╷      │    │[NAV] │      │      │      │      │
+ *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
+ */
+
+[_NAVIGATION] = LAYOUT(
+    _______, _______, KC_INS,  _______, _______, _______,                     KC_CLCK, KC_PSCR, KC_BTN3, KC_PAUS, KC_SLCK, _______,
+    _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
+    _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+                      _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
+),
+/* LMOD/RSYM + diaereses
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │      │   \  │   |  │   É  │   &  │   /  │                  │   !  │   Ú  │   Í  │   Ó  │   +  │      │
+ * │      │      │      │      │      │      │                  │   $  │   Ü  │   !  │   Ö  │   +  │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │   `  ┃   Á  ┃   $  ┃   [  ┃   ]  ┃   '  │ Scl↔        Word │   "  ┃   (  ┃   )  ┃   =  ┃Delete┃   ;  │
+ * │      ┃   ◆  ┃   ⌥  ┃   ⎈  ┃   ⇧  ┃      │ Scl↔             │   "  ┃   (  ┃   )  ┃   =  ┃Delete┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│   ~  │   {  │   }  │   %  │   *  │      │
+ * │      │      │      │      │      │      │╵    ╵      ╵    ╵│   ~  │   {  │   }  │   %  │   *  │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │ Esc  │      │Delete│ AltGr│ Menu │
+ *               │      │      │      │[LMOD]╷      │    │ Esc  │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
-[_LOWER] = LAYOUT(
+[_LMOD] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+[_RSYM] = LAYOUT(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-    _______, HU_BSLS, HU_PIPE, HU_EACU, HU_AMPR, HU_SLSH,                   HU_EXLM, HU_UACU, HU_IACU, HU_OACU, HU_PLUS, _______,
-    HU_GRV,  HU_AACU, HU_DLR,  HU_LBRC, HU_RBRC, HU_QUOT,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_EQL,  KC_DEL,  HU_SCLN,
-    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, _______,
-                      _______, _______, _______, _______, _______, KC_ESC,  _______, KC_DEL,  KC_RALT, KC_APP
+    _______, _______, _______, _______, _______, _______,                   HU_DLR,  HU_UDIA, HU_EXLM, HU_ODIA, HU_PLUS, _______,
+    _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_EQL,  KC_DEL,  HU_SCLN,
+    _______, _______, _______, _______, _______, _______, _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, _______,
+                      _______, _______, _______, _______, _______, KC_ESC,  _______, _______, _______, _______
 ),
-/* RAISE
+/* RMOD/LSYM + acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │ Help │Insert│      │      │      │                  │CapsLk│PrtScr│ScrLk │PauBrk│      │      │
+ * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │   Ü  │ M  ↑ │   Ö  │ MMB  │      │
+ * │      │   \  │   |  │   É  │   /  │   &  │                  │      │   Ú  │   Í  │   Ó  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │RGB VAL    RGB HUE│  LMB ┃ M  ← ┃ M  ↓ ┃ M  → ┃ RMB  ┃      │
+ * │   `  ┃   Á  ┃   ;  ┃   [  ┃   ]  ┃   '  │RGB VAL    RGB HUE│      ┃   ⇧  ┃   ⎈  ┃   ⌥  ┃   ◆  ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │      │      │      │      │      │╵    ╵      ╵    ╵│      │ Left │ Down │  Up  │Right │      │
+ * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               │      │      │      │      ╷      │    │      │[RMOD]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
-[_RAISE] = LAYOUT(
-    _______, KC_HELP, KC_INS,  _______, _______, _______,                     KC_CLCK, KC_PSCR, KC_SLCK, KC_PAUS, _______, _______,
-    _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, HU_UDIA, KC_MS_U, HU_ODIA, KC_BTN3, _______,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN2, _______,
-    _______, _______, _______, _______, _______, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-                      _______, _______, ADJUST,  KC_DEL,   _______, _______,  _______, _______, _______, _______
+[_RMOD] = LAYOUT(
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, OM_RALT, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
-/* ADJUST (Press LOWER and RAISE together)
+[_LSYM] = LAYOUT(
+    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
+    HU_GRV,  HU_AACU, HU_SCLN, HU_LBRC, HU_RBRC, HU_QUOT,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
+    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
+                      _______, _______, _______, KC_DEL,  _______, _______, _______, _______, _______, _______
+),
+/* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │RESET │      │      │      │      │      │                  │      │      │      │      │      │      │
+ * │ RESET│      │      │      │      │      │                  │      │      │      │      │      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │ Eject│                  │      │   Ű  │      │   Ő  │      │      │
+ * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │      │                  │      │   Ű  │      │   Ő  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃      │                  │ MUTE ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
+ * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃      │                  │      ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │      │      │ Sleep│      │      │╵    ╵      ╵    ╵│ Stop │ Rwnd │      │      │ Ffwd │      │
+ * │ DEBUG│      │ Wake │ Sleep│      │      │╵    ╵      ╵    ╵│      │ Rwnd │ Mute │ Stop │ Ffwd │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │      ╷      │    │      │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
@@ -132,9 +190,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ADJUST] = LAYOUT(
     RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, KC_EJCT,                   XXXXXXX, HU_UDAC, XXXXXXX, HU_ODAC, XXXXXXX, XXXXXXX,
-    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   KC_MUTE, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MSTP, KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD, XXXXXXX,
+    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, XXXXXXX, HU_ODAC, XXXXXXX, XXXXXXX,
+    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
+    DEBUG,   XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 /* NUMBER
@@ -147,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │      │      │      │   5  │      │╵    ╵      ╵    ╵│      │   6  │      │      │      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               │      │      │ [NUM]│      ╷      │    │      │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
@@ -164,18 +222,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │      │      │      │      │      │                  │      │      │      │      │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │ F12  ┃  F1  ┃  F2  ┃  F3  ┃  F4  ┃      │                  │      ┃  F7  ┃  F8  ┃  F9  ┃ F10  ┃ F11  │
+ * │      ┃  F1  ┃  F2  ┃  F3  ┃  F4  ┃  F12 │                  │  F11 ┃  F7  ┃  F8  ┃  F9  ┃ F10  ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │      │      │      │  F5  │      │╵    ╵      ╵    ╵│      │  F6  │      │      │      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │      │      │      │      │      │
+ *               │      │      │      │      ╷      │    │      │      │ [FUN]│      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
 [_FUNCTION] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,                   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F12,                    KC_F11,  KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, _______, _______, _______, KC_F5,   _______, _______, _______, _______, KC_F6,   _______, _______, _______, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
@@ -183,25 +241,64 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
+    state = update_tri_layer_state(state, _LSYM, _RSYM, _ADJUST);
     return state;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed){
-        // Turn off numbers layer automatically
-        if (IS_LAYER_ON(_NUMBER)) {
-            switch (keycode) {
-            case HU_0:
-            case HU_1 ... HU_9:
-                break;
-            default:
-                layer_off(_NUMBER);
-                break;
+    // // Turn off numbers layer automatically
+    // // provided that the key pressed is not a number
+    // if (
+    //     IS_LAYER_ON(_NUMBER) && record->event.pressed
+    //     && !(
+    //         keycode == HU_0
+    //         || (HU_1 <= keycode && keycode <= HU_9)
+    //     )
+    // ) {
+    //     layer_off(_NUMBER);
+    // }
+    
+    // One-shot modifier fire detection
+    if (IS_LAYER_ON(_LMOD) || IS_LAYER_ON(_RMOD)) {
+        if (OM_LSFT <= keycode && keycode <= OM_RGUI) {
+            if (record->event.pressed) {
+                register_code(om_keycodes[keycode - SAFE_RANGE]);
+                ++om_count;
+            } else {
+                unregister_code(om_keycodes[keycode - SAFE_RANGE]);
+                --om_count;
+                if (om_count < 1) {
+                    layer_off(_LMOD);
+                    layer_off(_RMOD);
+                }
             }
         }
     }
+
+    // One-shot modifier entry point
+    if (
+        (IS_LAYER_ON(_RSYM) || IS_LAYER_ON(_LSYM)) // a symbol layer is on and
+        && (OM_LSFT <= keycode && keycode <= OM_RGUI) // a one-shot mod
+        && record->event.pressed                      // was pressed
+    ) {
+        if (IS_LAYER_ON(_RSYM)) {
+            layer_off(_RSYM);
+            layer_on(_LMOD);
+        }
+        if (IS_LAYER_ON(_LSYM)) {
+            layer_off(_LSYM);
+            layer_on(_RMOD);
+        }
+        register_code(om_keycodes[keycode - SAFE_RANGE]); // Hold modifier
+        ++om_count; // Remember that one mod key is being held
+        return false;
+    }
+
     return true;
+}
+
+void suspend_power_down_user() {
+    oled_off();
 }
 
 #ifdef OLED_DRIVER_ENABLE
@@ -350,82 +447,57 @@ void render_mod_status_ctrl_shift(uint8_t modifiers) {
 }
 
 void render_logo(void) {
-    static const char PROGMEM corne_logo[] = {
+    static const char PROGMEM ABS_logo[] = {
         0x80, 0x81, 0x82, 0x83, 0x84,
         0xA0, 0xA1, 0xA2, 0xA3, 0xA4,
         0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0};
-    oled_write_P(corne_logo, false);
-    // oled_write_P(PSTR("Kimiko"), false);
+    oled_write_P(ABS_logo, false);
 }
 
 void render_layer_state(void) {
-    static const char PROGMEM default_layer[] = {
-        0x20, 0x94, 0x95, 0x96, 0x20,
-        0x20, 0xb4, 0xb5, 0xb6, 0x20,
-        0x20, 0xd4, 0xd5, 0xd6, 0x20, 0};
-    static const char PROGMEM raise_layer[] = {
-        0x20, 0x97, 0x98, 0x99, 0x20,
-        0x20, 0xb7, 0xb8, 0xb9, 0x20,
-        0x20, 0xd7, 0xd8, 0xd9, 0x20, 0};
-    static const char PROGMEM lower_layer[] = {
-        0x20, 0x9a, 0x9b, 0x9c, 0x20,
-        0x20, 0xba, 0xbb, 0xbc, 0x20,
-        0x20, 0xda, 0xdb, 0xdc, 0x20, 0};
-    static const char PROGMEM adjust_layer[] = {
-        0x20, 0x9d, 0x9e, 0x9f, 0x20,
-        0x20, 0xbd, 0xbe, 0xbf, 0x20,
-        0x20, 0xdd, 0xde, 0xdf, 0x20, 0};
-    if(layer_state_is(_ADJUST)) {
-        oled_write_P(adjust_layer, false);
-    } else if(layer_state_is(_LOWER)) {
-        oled_write_P(lower_layer, false);
-    } else if(layer_state_is(_RAISE)) {
-        oled_write_P(raise_layer, false);
-    } else {
-        oled_write_P(default_layer, false);
-    }
+    if (IS_LAYER_ON(_QWERTZ))
+        oled_write_ln_P(PSTR(" BASE"), false);
+    else if (IS_LAYER_ON(_NAVIGATION))
+        oled_write_ln_P(PSTR("  NAV"), false);
+    else if (IS_LAYER_ON(_ADJUST))
+        oled_write_ln_P(PSTR("  ADJ"), false);
+    else if (IS_LAYER_ON(_NUMBER))
+        oled_write_ln_P(PSTR("  NUM"), false);
+    else if (IS_LAYER_ON(_FUNCTION))
+        oled_write_ln_P(PSTR("  FUN"), false);
+    else if (IS_LAYER_ON(_RSYM))
+        oled_write_ln_P(PSTR(" RSYM"), false);
+    else if (IS_LAYER_ON(_LSYM))
+        oled_write_ln_P(PSTR(" LSYM"), false);
+    else
+        oled_write_ln_P(PSTR("     "), false);
+}
+
+void render_mod_layer_state(void) {
+    if (IS_LAYER_ON(_LMOD))
+        oled_write_ln_P(PSTR(" LMOD"), false);
+    else if (IS_LAYER_ON(_RMOD))
+        oled_write_ln_P(PSTR(" RMOD"), false);
+    else
+        oled_write_ln_P(PSTR("     "), false);
 }
 
 void render_status_main(void) {
     render_space();
     render_logo();
     render_space();
+    render_space();
+    render_space();
     render_layer_state();
+    render_mod_layer_state();
     render_space();
     render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
     render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
-    render_space();
-    switch(get_highest_layer(layer_state)) {
-        case _QWERTZ:
-            oled_write_P(PSTR(" BAS"), false);
-            break;
-        case _LOWER:
-            oled_write_P(PSTR(" LWR"), false);
-            break;
-        case _RAISE:
-            oled_write_P(PSTR(" RSE"), false);
-            break;
-        case _ADJUST:
-            oled_write_P(PSTR(" ADJ"), false);
-            break;
-        case _NUMBER:
-            oled_write_P(PSTR(" NUM"), false);
-            break;
-        case _FUNCTION:
-            oled_write_P(PSTR(" FUN"), false);
-            break;
-    }
-    // if (layer_state_is(_GAMING) == true) {
-    //     render_space(); 
-    //     oled_write_P(PSTR(" GAM"), false);
-    // }
-
 }
 
 void render_status_secondary(void) {
     render_space();
     render_logo();
-    render_space();
 }
 
 void oled_task_user(void) {
@@ -453,7 +525,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
 
-            case _LOWER:
+            case _NAVIGATION:
+
+                // Scroll by Word
+                if (clockwise) {
+                    tap_code16(LCTL(KC_RGHT));
+                } else {
+                    tap_code16(LCTL(KC_LEFT));
+                }
+                break;
+
+            case _LMOD:
                 // Mouse scroll Right/Left
                 if (clockwise) {
                     tap_code(KC_WH_R);
@@ -462,7 +544,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
             
-            case _RAISE:
+            case _RMOD:
                 // RGB brightness up/down
                 if (clockwise) {
                     rgblight_decrease_val();
@@ -484,17 +566,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
                 break;
 
-            case _LOWER:
-
-                // Scroll by Word
-                if (clockwise) {
-                    tap_code16(LCTL(KC_RGHT));
-                } else {
-                    tap_code16(LCTL(KC_LEFT));
-                }
-                break;
-
-            case _RAISE:
+            case _RMOD:
                 // RGB hue Up/Down
                 if (clockwise) {
                     rgblight_increase_hue();

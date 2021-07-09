@@ -1,5 +1,5 @@
 OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
-ENCODER_ENABLE = yes       # ENables the use of one or more encoders
+ENCODER_ENABLE = yes       # Enables the use of one or more encoders
 RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
 
 # LTO: Link Time Optimizations.
@@ -9,3 +9,5 @@ LTO_ENABLE = yes
 BOOTLOADER = caterina      # Compile for Pro Micro 
 
 MOUSEKEY_ENABLE = yes
+
+# CONSOLE_ENABLE = yes
