@@ -69,9 +69,9 @@ uint16_t om_count = 0;
 bool capsword = false;
 
 #define LAY_BAS TO(_QWERTZ)
-#define LAY_RSM MO(_RSYM)
-// #define LAY_LSM MO(_LSYM)
-#define LAY_LSM LT(_LSYM, KC_SPACE)
+// #define LAY_RSM MO(_RSYM)
+#define LAY_RSM LT(_RSYM, KC_SPACE)
+#define LAY_LSM MO(_LSYM)
 #define LAY_ADJ MO(_ADJUST)
 #define LAY_LNM MO(_LNUM)
 #define LAY_RNM MO(_RNUM)
