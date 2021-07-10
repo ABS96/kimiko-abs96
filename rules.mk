@@ -9,5 +9,3 @@ LTO_ENABLE = yes
 BOOTLOADER = caterina      # Compile for Pro Micro 
 
 MOUSEKEY_ENABLE = yes
-
-# CONSOLE_ENABLE = yes
