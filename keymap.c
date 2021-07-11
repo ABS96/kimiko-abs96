@@ -69,8 +69,8 @@ uint16_t om_count = 0;
 bool capsword = false;
 
 #define LAY_BAS TO(_QWERTZ)
-// #define LAY_RSM MO(_RSYM)
-#define LAY_RSM LT(_RSYM, KC_SPACE)
+#define LAY_RSM MO(_RSYM)
+// #define LAY_RSM LT(_RSYM, KC_SPACE)
 #define LAY_LSM MO(_LSYM)
 #define LAY_ADJ MO(_ADJUST)
 #define LAY_LNM MO(_LNUM)
@@ -345,16 +345,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case HU_UACU:
         case HU_UDIA:
         case HU_UDAC:
+
+        case HU_MINS:
         case HU_UNDS:
+
         case 20738: // RSYM
         case 20739: // LSYM
         case 20740: // RNUM
         case 20741: // LNUM
         case KC_LSFT:
         case KC_RSFT:
-            break;
-        case HU_MINS:
-            unregister_code(KC_LSFT);
             break;
         default:
             capsword = false;
@@ -364,13 +364,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         !record->event.pressed
         && (keycode == KC_LSFT || keycode == KC_RSFT)
     ) {
-        return false;
-    } else if (
-        !record->event.pressed
-        && keycode == HU_MINS
-    ) {
-        tap_code(HU_MINS);
-        register_code(KC_LSFT);
         return false;
     }
 
