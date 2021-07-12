@@ -50,7 +50,7 @@ enum custom_keycodes {
     OM_RALT,
     OM_RGUI,
 
-    CAPSWRD
+    // CAPSWRD
 };
 
 uint16_t om_keycodes[] = {
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │  Esc │   1  │   2  │   3  │   4  │   5  │                  │   6  │   7  │   8  │   9  │   0  │ Esc  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │  Tab │   Q  │   W  │   E  │   R  │   T  │                  │   Z  │   U  │   I  │   O  │   P  │CPSWRD│
+ * │  Tab │   Q  │   W  │   E  │   R  │   T  │                  │   Z  │   U  │   I  │   O  │   P  │F13CWD│
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
  * │   ⇧  ┃   A  ┃   S  ┃   D  ┃   F  ┃   G  │ Scl↕        VOL↕ │   H  ┃   J  ┃   K  ┃   L  ┃BackSp┃   ⇧  │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QWERTZ] = LAYOUT(
     KC_ESC,  HU_1,    HU_2,    HU_3,    HU_4,    HU_5,                      HU_6,    HU_7,    HU_8,    HU_9,    HU_0,    KC_ESC,
-    KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    CAPSWRD,
+    KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    KC_F13,
     KC_LSFT, HU_A,    HU_S,    HU_D,    HU_F,    HU_G,                      HU_H,    HU_J,    HU_K,    HU_L,    KC_BSPC, KC_RSFT,
     KC_LCTL, HU_Y,    HU_X,    HU_C,    HU_V,    HU_B,    KC_MPLY, KC_MUTE, HU_N,    HU_M,    HU_COMM, HU_DOT,  HU_MINS, KC_RCTL,
              KC_LGUI, KC_LALT, LAY_RNM, LAY_RSM, KC_SPC,  LAY_NAV, LAY_LSM, LAY_LNM, KC_LALT, KC_RGUI
@@ -294,78 +294,78 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    if (!capsword) {
-        if (keycode == CAPSWRD && record->event.pressed) {
-            capsword = true;
-            register_code(KC_LSFT);
-        }
-    } else if (record->event.pressed) {
-        switch (keycode) {
-        case HU_1:
-        case HU_2:
-        case HU_3:
-        case HU_4:
-        case HU_5:
-        case HU_6:
-        case HU_7:
-        case HU_8:
-        case HU_9:
-        case HU_0:
-        case HU_A:
-        case HU_B:
-        case HU_C:
-        case HU_D:
-        case HU_E:
-        case HU_F:
-        case HU_G:
-        case HU_H:
-        case HU_I:
-        case HU_J:
-        case HU_K:
-        case HU_L:
-        case HU_M:
-        case HU_N:
-        case HU_O:
-        case HU_P:
-        case HU_Q:
-        case HU_R:
-        case HU_S:
-        case HU_T:
-        case HU_U:
-        case HU_V:
-        case HU_W:
-        case HU_X:
-        case HU_Y:
-        case HU_Z:
-        case HU_AACU:
-        case HU_EACU:
-        case HU_OACU:
-        case HU_ODIA:
-        case HU_ODAC:
-        case HU_UACU:
-        case HU_UDIA:
-        case HU_UDAC:
+    // if (!capsword) {
+    //     if (keycode == CAPSWRD && record->event.pressed) {
+    //         capsword = true;
+    //         register_code(KC_LSFT);
+    //     }
+    // } else if (record->event.pressed) {
+    //     switch (keycode) {
+    //     case HU_1:
+    //     case HU_2:
+    //     case HU_3:
+    //     case HU_4:
+    //     case HU_5:
+    //     case HU_6:
+    //     case HU_7:
+    //     case HU_8:
+    //     case HU_9:
+    //     case HU_0:
+    //     case HU_A:
+    //     case HU_B:
+    //     case HU_C:
+    //     case HU_D:
+    //     case HU_E:
+    //     case HU_F:
+    //     case HU_G:
+    //     case HU_H:
+    //     case HU_I:
+    //     case HU_J:
+    //     case HU_K:
+    //     case HU_L:
+    //     case HU_M:
+    //     case HU_N:
+    //     case HU_O:
+    //     case HU_P:
+    //     case HU_Q:
+    //     case HU_R:
+    //     case HU_S:
+    //     case HU_T:
+    //     case HU_U:
+    //     case HU_V:
+    //     case HU_W:
+    //     case HU_X:
+    //     case HU_Y:
+    //     case HU_Z:
+    //     case HU_AACU:
+    //     case HU_EACU:
+    //     case HU_OACU:
+    //     case HU_ODIA:
+    //     case HU_ODAC:
+    //     case HU_UACU:
+    //     case HU_UDIA:
+    //     case HU_UDAC:
 
-        case HU_MINS:
-        case HU_UNDS:
+    //     case HU_MINS:
+    //     case HU_UNDS:
 
-        case 20738: // RSYM
-        case 20739: // LSYM
-        case 20740: // RNUM
-        case 20741: // LNUM
-        case KC_LSFT:
-        case KC_RSFT:
-            break;
-        default:
-            capsword = false;
-            unregister_code(KC_LSFT);
-        }
-    } else if (
-        !record->event.pressed
-        && (keycode == KC_LSFT || keycode == KC_RSFT)
-    ) {
-        return false;
-    }
+    //     case 20738: // RSYM
+    //     case 20739: // LSYM
+    //     case 20740: // RNUM
+    //     case 20741: // LNUM
+    //     case KC_LSFT:
+    //     case KC_RSFT:
+    //         break;
+    //     default:
+    //         capsword = false;
+    //         unregister_code(KC_LSFT);
+    //     }
+    // } else if (
+    //     !record->event.pressed
+    //     && (keycode == KC_LSFT || keycode == KC_RSFT)
+    // ) {
+    //     return false;
+    // }
 
     return true;
 }
