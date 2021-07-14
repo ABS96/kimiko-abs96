@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Word↔            │      ┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃  Tab │ Word↔            │      ┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │ Word←│ Word→│ Tab← │ Tab→ │      │╵    ╵      ╵    ╵│      │ Left │ Down │  Up  │ Right│      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
@@ -123,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NAVIGATION] = LAYOUT(
     _______, _______, KC_INS,  _______, _______, _______,                     KC_CLCK, KC_PSCR, KC_BTN3, KC_PAUS, KC_SLCK, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, _______,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_TAB,                     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
                       _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
 ),
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, _______, _______, _______, _______, _______,                   HU_DLR,  HU_UDIA, HU_EXLM, HU_ODIA, HU_PLUS, HU_MINS,
     _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_EQL,  KC_DEL,  HU_UNDS,
-    _______, _______, _______, _______, _______, _______, _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, HU_COLN,
                       _______, _______, _______, _______, _______, KC_ESC,  _______, _______, _______, _______
 ),
 /* LSYM(RMOD) + acutes
