@@ -31,8 +31,7 @@ enum layers {
     _RSYM,
     _LSYM,
 
-    _LNUM,
-    _RNUM,
+    _NVKP,
 
     _ADJUST,
     
@@ -70,12 +69,11 @@ bool capsword = false;
 
 #define LAY_BAS TO(_QWERTZ)
 #define LAY_RSM MO(_RSYM)
-// #define LAY_RSM LT(_RSYM, KC_SPACE)
 #define LAY_LSM MO(_LSYM)
 #define LAY_ADJ MO(_ADJUST)
-#define LAY_LNM MO(_LNUM)
-#define LAY_RNM MO(_RNUM)
-#define LAY_NAV LT(_NAVIGATION, KC_ENT)
+#define LAY_NKP MO(_NVKP)
+#define LAY_NAV MO(_NAVIGATION)
+#define ENT_NAV LT(_NAVIGATION, KC_ENT)
 
 #define TAB_NXT C(KC_TAB)
 #define TAB_PRV S(C(KC_TAB))
@@ -94,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │   ⎈  │   Y  │   X  │   C  │   V  │   B  │╵Play╵      ╵Mute╵│   N  │   M  │   ,  │   .  │   -  │   ⎈  │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │   ◆  │   ⌥  │ RNUM │ RSYM ╷Space │    │ NAV/⏎╷ LSYM │ LNUM │   ⌥  │   ◆  │
+ *               │   ◆  │   ⌥  │NAV/KP│ RSYM ╷Space │    │ NAV/⏎╷ LSYM │NAV/KP│   ⌥  │   ◆  │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
@@ -103,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    KC_F13,
     KC_LSFT, HU_A,    HU_S,    HU_D,    HU_F,    HU_G,                      HU_H,    HU_J,    HU_K,    HU_L,    KC_BSPC, KC_RSFT,
     KC_LCTL, HU_Y,    HU_X,    HU_C,    HU_V,    HU_B,    KC_MPLY, KC_MUTE, HU_N,    HU_M,    HU_COMM, HU_DOT,  HU_MINS, KC_RCTL,
-             KC_LGUI, KC_LALT, LAY_RNM, LAY_RSM, KC_SPC,  LAY_NAV, LAY_LSM, LAY_LNM, KC_LALT, KC_RGUI
+             KC_LGUI, KC_LALT, LAY_NKP, LAY_RSM, KC_SPC,  ENT_NAV, LAY_LSM, LAY_NKP, KC_LALT, KC_RGUI
 ),
 
 /* NAVIGATION
@@ -186,49 +184,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, KC_MPLY, HU_ODAC, XXXXXXX, XXXXXXX,
     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
-    DEBUG,   XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
+    XXXXXXX, XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
-/* LNUM(RMOD)
+/* NAVIGATION / KEYPAD
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │ KP 1 │ KP 2 │ KP 3 │ KP 4 │ KP 5 │                  │      │      │      │      │      │      │
+ * │      │      │Insert│      │      │      │                  │      │      │ KP / │ KP * │ KP - │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │      │      │      │      │      │      │
+ * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │ KP 4 │ KP 5 │ KP 6 │ KP + │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃   1  ┃   2  ┃   3  ┃   4  ┃   5  │                  │      ┃   ⇧  ┃   ⎈  ┃   ⌥  ┃   ◆  ┃      │
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │                  │ KP . ┃ KP 1 ┃ KP 2 ┃ KP 3 ┃ KP 0 ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │      │      │      │   5  │      │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
+ * │      │ Word←│ Word→│ Tab← │ Tab→ │      │╵    ╵      ╵    ╵│      │ KP 7 │ KP 8 │ KP 9 │ KP ⏎ │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │      │      │[LNUM]│      │      │
+ *               │      │      │[NVKP]│      ╷      │    │      │      │[NVKP]│      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
-[_LNUM] = LAYOUT(
-    _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_4, KC_KP_5,                   _______, _______, _______, _______, _______, _______,
-    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     _______, _______, _______, _______, _______, _______,
-    _______, HU_1,    HU_2,    HU_3,    HU_4,    HU_5,                      _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
-    _______, _______, _______, _______, HU_5,    _______, _______, _______, _______, _______, _______, OM_RALT, _______, _______,
-                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-),
-/* RNUM(LMOD)
- * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │      │      │      │      │      │                  │ KP 6 │ KP 7 │ KP 8 │ KP 9 │ KP 0 │      │
- * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │      │      │      │      │      │      │                  │  F6  │  F7  │  F8  │  F9  │  F10 │  F11 │
- * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃   ◆  ┃   ⌥  ┃   ⎈  ┃   ⇧  ┃      │                  │   6  ┃   7  ┃   8  ┃   9  ┃   0  ┃      │
- * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │      │      │      │      │      │╵    ╵      ╵    ╵│ KP . │   6  │ KP / │ KP * │ KP - │ KP + │
- * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │[RNUM]│      ╷      │    │ KP ⏎ │      │      │      │      │
- *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
- */
-
-[_RNUM] = LAYOUT(
-    _______, _______, _______, _______, _______, _______,                   KC_KP_6, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_0, _______,
-    _______, _______, _______, _______, _______, _______,                   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-    _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   HU_6,    HU_7,    HU_8,    HU_9,    HU_0,    _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_PDOT, HU_6,    KC_PSLS, KC_PAST, KC_PMNS, KC_PPLS,
+[_NVKP] = LAYOUT(
+    _______, _______, KC_INS,  _______, _______, _______,                   _______, _______, KC_PSLS, KC_PAST, KC_PMNS, _______,
+    _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                   _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_TAB,                    KC_PDOT, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, _______,
+    _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 [_LMOD] = LAYOUT(
@@ -285,10 +262,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_LSYM);
             layer_on(_RMOD);
         }
-        if (IS_LAYER_ON(_RNUM))
-            layer_on(_LMOD);
-        if (IS_LAYER_ON(_LNUM))
-            layer_on(_RMOD);
+
         register_code(om_keycodes[keycode - SAFE_RANGE]); // Hold modifier
         ++om_count; // Remember that one mod key is being held
         return false;
@@ -534,10 +508,8 @@ void render_layer_state(void) {
         oled_write_ln_P(PSTR(" NAV "), false);
     else if (IS_LAYER_ON(_ADJUST))
         oled_write_ln_P(PSTR(" ADJ "), false);
-    else if (IS_LAYER_ON(_LNUM))
-        oled_write_ln_P(PSTR(" LNUM"), false);
-    else if (IS_LAYER_ON(_RNUM))
-        oled_write_ln_P(PSTR(" RNUM"), false);
+    else if (IS_LAYER_ON(_NVKP))
+        oled_write_ln_P(PSTR("NV/KP"), false);
     else if (IS_LAYER_ON(_RSYM))
         oled_write_ln_P(PSTR(" RSYM"), false);
     else if (IS_LAYER_ON(_LSYM))
@@ -602,6 +574,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 break;
 
             case _NAVIGATION:
+            case _NVKP:
 
                 // Scroll by Word
                 if (clockwise) {
@@ -639,6 +612,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_VOLU);
                 } else {
                     tap_code(KC_VOLD);
+                }
+                break;
+
+            case _NAVIGATION:
+            case _NVKP:
+
+                // Switch tab
+                if (clockwise) {
+                    tap_code16(LSFT(LCTL(KC_TAB)));
+                } else {
+                    tap_code16(LCTL(KC_TAB));
                 }
                 break;
 
