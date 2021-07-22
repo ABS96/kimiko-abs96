@@ -268,79 +268,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    // if (!capsword) {
-    //     if (keycode == CAPSWRD && record->event.pressed) {
-    //         capsword = true;
-    //         register_code(KC_LSFT);
-    //     }
-    // } else if (record->event.pressed) {
-    //     switch (keycode) {
-    //     case HU_1:
-    //     case HU_2:
-    //     case HU_3:
-    //     case HU_4:
-    //     case HU_5:
-    //     case HU_6:
-    //     case HU_7:
-    //     case HU_8:
-    //     case HU_9:
-    //     case HU_0:
-    //     case HU_A:
-    //     case HU_B:
-    //     case HU_C:
-    //     case HU_D:
-    //     case HU_E:
-    //     case HU_F:
-    //     case HU_G:
-    //     case HU_H:
-    //     case HU_I:
-    //     case HU_J:
-    //     case HU_K:
-    //     case HU_L:
-    //     case HU_M:
-    //     case HU_N:
-    //     case HU_O:
-    //     case HU_P:
-    //     case HU_Q:
-    //     case HU_R:
-    //     case HU_S:
-    //     case HU_T:
-    //     case HU_U:
-    //     case HU_V:
-    //     case HU_W:
-    //     case HU_X:
-    //     case HU_Y:
-    //     case HU_Z:
-    //     case HU_AACU:
-    //     case HU_EACU:
-    //     case HU_OACU:
-    //     case HU_ODIA:
-    //     case HU_ODAC:
-    //     case HU_UACU:
-    //     case HU_UDIA:
-    //     case HU_UDAC:
-
-    //     case HU_MINS:
-    //     case HU_UNDS:
-
-    //     case 20738: // RSYM
-    //     case 20739: // LSYM
-    //     case 20740: // RNUM
-    //     case 20741: // LNUM
-    //     case KC_LSFT:
-    //     case KC_RSFT:
-    //         break;
-    //     default:
-    //         capsword = false;
-    //         unregister_code(KC_LSFT);
-    //     }
-    // } else if (
-    //     !record->event.pressed
-    //     && (keycode == KC_LSFT || keycode == KC_RSFT)
-    // ) {
-    //     return false;
-    // }
-
     return true;
 }
 
@@ -361,143 +288,128 @@ void render_space(void) {
     oled_write_P(PSTR("     "), false);
 }
 
-void render_mod_status_gui_alt(uint8_t modifiers) {
-    static const char PROGMEM gui_off_1[] = {0x85, 0x86, 0};
-    static const char PROGMEM gui_off_2[] = {0xa5, 0xa6, 0};
-    static const char PROGMEM gui_on_1[] = {0x8d, 0x8e, 0};
-    static const char PROGMEM gui_on_2[] = {0xad, 0xae, 0};
+uint8_t count_ones(uint8_t sample) {
+    static const uint8_t LUT4[16] = {
+        0, 1, 1, 2, 1, 2, 2, 3,
+        1, 2, 2, 3, 2, 3, 3, 4
+    };
 
-    static const char PROGMEM alt_off_1[] = {0x87, 0x88, 0};
-    static const char PROGMEM alt_off_2[] = {0xa7, 0xa8, 0};
-    static const char PROGMEM alt_on_1[] = {0x8f, 0x90, 0};
-    static const char PROGMEM alt_on_2[] = {0xaf, 0xb0, 0};
-
-    // fillers between the modifier icons bleed into the icon frames
-    static const char PROGMEM off_off_1[] = {0xc5, 0};
-    static const char PROGMEM off_off_2[] = {0xc6, 0};
-    static const char PROGMEM on_off_1[] = {0xc7, 0};
-    static const char PROGMEM on_off_2[] = {0xc8, 0};
-    static const char PROGMEM off_on_1[] = {0xc9, 0};
-    static const char PROGMEM off_on_2[] = {0xca, 0};
-    static const char PROGMEM on_on_1[] = {0xcb, 0};
-    static const char PROGMEM on_on_2[] = {0xcc, 0};
-
-    if(modifiers & MOD_MASK_GUI) {
-        oled_write_P(gui_on_1, false);
-    } else {
-        oled_write_P(gui_off_1, false);
-    }
-
-    if ((modifiers & MOD_MASK_GUI) && (modifiers & MOD_MASK_ALT)) {
-        oled_write_P(on_on_1, false);
-    } else if(modifiers & MOD_MASK_GUI) {
-        oled_write_P(on_off_1, false);
-    } else if(modifiers & MOD_MASK_ALT) {
-        oled_write_P(off_on_1, false);
-    } else {
-        oled_write_P(off_off_1, false);
-    }
-
-    if(modifiers & MOD_MASK_ALT) {
-        oled_write_P(alt_on_1, false);
-    } else {
-        oled_write_P(alt_off_1, false);
-    }
-
-    if(modifiers & MOD_MASK_GUI) {
-        oled_write_P(gui_on_2, false);
-    } else {
-        oled_write_P(gui_off_2, false);
-    }
-
-    if (modifiers & MOD_MASK_GUI & MOD_MASK_ALT) {
-        oled_write_P(on_on_2, false);
-    } else if(modifiers & MOD_MASK_GUI) {
-        oled_write_P(on_off_2, false);
-    } else if(modifiers & MOD_MASK_ALT) {
-        oled_write_P(off_on_2, false);
-    } else {
-        oled_write_P(off_off_2, false);
-    }
-
-    if(modifiers & MOD_MASK_ALT) {
-        oled_write_P(alt_on_2, false);
-    } else {
-        oled_write_P(alt_off_2, false);
-    }
+    return LUT4[sample & 0x0F];
 }
 
-void render_mod_status_ctrl_shift(uint8_t modifiers) {
-    static const char PROGMEM ctrl_off_1[] = {0x89, 0x8a, 0};
-    static const char PROGMEM ctrl_off_2[] = {0xa9, 0xaa, 0};
-    static const char PROGMEM ctrl_on_1[] = {0x91, 0x92, 0};
-    static const char PROGMEM ctrl_on_2[] = {0xb1, 0xb2, 0};
+void render_modifiers(uint8_t mods) {
+    static const char PROGMEM ctrl_4x[] = {
+        0x20, 0x85, 0x86, 0x87, 0x88,
+        0x20, 0xA5, 0xA6, 0xA7, 0xA8,
+        0x20, 0xC5, 0xC6, 0xC7, 0xC8,
+    0};
+    static const char PROGMEM shift_4x[] = {
+        0x20, 0x20, 0x8A, 0x8B, 0x20,
+        0x20, 0xA9, 0xAA, 0xAB, 0xAC,
+        0x20, 0x20, 0xCA, 0xCB, 0x20,
+    0};
+    static const char PROGMEM alt_4x[] = {
+        0x20, 0x8D, 0x8E, 0x8F, 0x90,
+        0x20, 0xAD, 0xAE, 0xAF, 0xB0,
+        0x20, 0x20, 0x20, 0x20, 0x20,
+    0};
+    static const char PROGMEM gui_4x[] = {
+        0x20, 0x20, 0x92, 0x93, 0x20,
+        0x20, 0xB1, 0xB2, 0xB3, 0xB4,
+        0x20, 0x20, 0xD2, 0xD3, 0x20,
+    0};
+    static const char PROGMEM meh_4x[] = {
+        0x20, 0x20, 0x20, 0x20, 0x20,
+        0xD5, 0xD6, 0xD7, 0xD8, 0xD9,
+        0x20, 0x20, 0x20, 0x20, 0x20,
+    0};
+    static const char PROGMEM hyper_4x[] = {
+        0x20, 0x20, 0xBE, 0xBF, 0x20,
+        0x20, 0xDA, 0xDB, 0xDC, 0xDD,
+        0x20, 0x20, 0xDE, 0xDF, 0x20,
+    0};
 
-    static const char PROGMEM shift_off_1[] = {0x8b, 0x8c, 0};
-    static const char PROGMEM shift_off_2[] = {0xab, 0xac, 0};
-    static const char PROGMEM shift_on_1[] = {0xcd, 0xce, 0};
-    static const char PROGMEM shift_on_2[] = {0xcf, 0xd0, 0};
+    static const char PROGMEM ctrl_2x_top[] =     {0x95, 0x96, 0};
+    static const char PROGMEM ctrl_2x_bottom[] =  {0xB5, 0xB6, 0};
+    static const char PROGMEM shift_2x_top[] =    {0x97, 0x98, 0};
+    static const char PROGMEM shift_2x_bottom[] = {0xB7, 0xB8, 0};
+    static const char PROGMEM alt_2x_top[] =      {0x99, 0x9A, 0};
+    static const char PROGMEM alt_2x_bottom[] =   {0xB9, 0xBA, 0};
+    static const char PROGMEM gui_2x_top[] =      {0x9B, 0x9C, 0};
+    static const char PROGMEM gui_2x_bottom[] =   {0xBB, 0xBC, 0};
 
-    // fillers between the modifier icons bleed into the icon frames
-    static const char PROGMEM off_off_1[] = {0xc5, 0};
-    static const char PROGMEM off_off_2[] = {0xc6, 0};
-    static const char PROGMEM on_off_1[] = {0xc7, 0};
-    static const char PROGMEM on_off_2[] = {0xc8, 0};
-    static const char PROGMEM off_on_1[] = {0xc9, 0};
-    static const char PROGMEM off_on_2[] = {0xca, 0};
-    static const char PROGMEM on_on_1[] = {0xcb, 0};
-    static const char PROGMEM on_on_2[] = {0xcc, 0};
+    static const char PROGMEM ctrl_1x[] =  {0x2A, 0};
+    static const char PROGMEM shift_1x[] = {0x9D, 0};
+    static const char PROGMEM alt_1x[] =   {0x9E, 0};
+    static const char PROGMEM gui_1x[] =   {0x9F, 0};
 
-    if(modifiers & MOD_MASK_CTRL) {
-        oled_write_P(ctrl_on_1, false);
-    } else {
-        oled_write_P(ctrl_off_1, false);
+    // mods: (GASC)R(GASC)L
+    uint8_t mod4 = (mods >> 4) | (mods & 0x0F);
+    bool ctrl_on =  (mod4 & 0b00000001) == 0b00000001;
+    bool shift_on = (mod4 & 0b00000010) == 0b00000010;
+    bool alt_on =   (mod4 & 0b00000100) == 0b00000100;
+    bool gui_on =   (mod4 & 0b00001000) == 0b00001000;
+
+    if (mod4 == 0x0F) {
+        oled_write_P(hyper_4x, false);
+        return;
     }
 
-    if ((modifiers & MOD_MASK_CTRL) && (modifiers & MOD_MASK_SHIFT)) {
-        oled_write_P(on_on_1, false);
-    } else if(modifiers & MOD_MASK_CTRL) {
-        oled_write_P(on_off_1, false);
-    } else if(modifiers & MOD_MASK_SHIFT) {
-        oled_write_P(off_on_1, false);
-    } else {
-        oled_write_P(off_off_1, false);
+    if (mod4 == 0b00000111) {
+        oled_write_P(meh_4x, false);
+        render_space();
+        render_space();
+        return;
     }
 
-    if(modifiers & MOD_MASK_SHIFT) {
-        oled_write_P(shift_on_1, false);
-    } else {
-        oled_write_P(shift_off_1, false);
+    if (count_ones(mod4) == 3) {
+        oled_write_P(PSTR("  "), false);
+        if (ctrl_on)  oled_write_P(ctrl_1x, false);
+        if (shift_on) oled_write_P(shift_1x, false);
+        if (alt_on)   oled_write_P(alt_1x, false);
+        if (gui_on)   oled_write_P(gui_1x, false);
+        render_space();
+        render_space();
+        return;
     }
 
-    if(modifiers & MOD_MASK_CTRL) {
-        oled_write_P(ctrl_on_2, false);
-    } else {
-        oled_write_P(ctrl_off_2, false);
+    if (count_ones(mod4) == 2) {
+        oled_write_P(PSTR(" "), false);
+        if (ctrl_on)  oled_write_P(ctrl_2x_top, false);
+        if (shift_on) oled_write_P(shift_2x_top, false);
+        if (alt_on)   oled_write_P(alt_2x_top, false);
+        if (gui_on)   oled_write_P(gui_2x_top, false);
+        oled_write_P(PSTR(" "), false);
+        if (ctrl_on)  oled_write_P(ctrl_2x_bottom, false);
+        if (shift_on) oled_write_P(shift_2x_bottom, false);
+        if (alt_on)   oled_write_P(alt_2x_bottom, false);
+        if (gui_on)   oled_write_P(gui_2x_bottom, false);
+        render_space();
+        return;
     }
 
-    if (modifiers & MOD_MASK_CTRL & MOD_MASK_SHIFT) {
-        oled_write_P(on_on_2, false);
-    } else if(modifiers & MOD_MASK_CTRL) {
-        oled_write_P(on_off_2, false);
-    } else if(modifiers & MOD_MASK_SHIFT) {
-        oled_write_P(off_on_2, false);
-    } else {
-        oled_write_P(off_off_2, false);
+    if (count_ones(mod4) == 1) {
+        if (ctrl_on)  oled_write_P(ctrl_4x, false);
+        if (shift_on) oled_write_P(shift_4x, false);
+        if (alt_on)   oled_write_P(alt_4x, false);
+        if (gui_on)   oled_write_P(gui_4x, false);
+        return;
     }
 
-    if(modifiers & MOD_MASK_SHIFT) {
-        oled_write_P(shift_on_2, false);
-    } else {
-        oled_write_P(shift_off_2, false);
+    if (count_ones(mod4) == 0) {
+        render_space();
+        render_space();
+        render_space();
+        return;
     }
 }
 
 void render_logo(void) {
     static const char PROGMEM ABS_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84,
+        0x20, 0x81, 0x82, 0x83, 0x84,
         0xA0, 0xA1, 0xA2, 0xA3, 0xA4,
-        0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0};
+        0xC0, 0xC1, 0xC2, 0x20, 0x20,
+    0};
     oled_write_P(ABS_logo, false);
 }
 
@@ -528,8 +440,6 @@ void render_mod_layer_state(void) {
 }
 
 void render_status_main(void) {
-    // static char kc_txt[6];
-    // snprintf(kc_txt, 5, "%d", debug_kc);
     render_space();
     render_logo();
     render_space();
@@ -538,9 +448,7 @@ void render_status_main(void) {
     render_layer_state();
     render_mod_layer_state();
     render_space();
-    // oled_write_ln(kc_txt, false);
-    render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
-    render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
+    render_modifiers(get_mods() | get_oneshot_mods());
 }
 
 void render_status_secondary(void) {
