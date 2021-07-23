@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* NAVIGATION
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │      │Insert│      │      │      │                  │CapsLk│PrtScr│  MMB │PauBrk│ ScrLk│      │
+ * │      │      │Insert│Delete│      │      │                  │CapsLk│PrtScr│  MMB │PauBrk│ ScrLk│      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
@@ -119,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NAVIGATION] = LAYOUT(
-    _______, _______, KC_INS,  _______, _______, _______,                     KC_CLCK, KC_PSCR, KC_BTN3, KC_PAUS, KC_SLCK, _______,
+    _______, _______, KC_INS,  KC_DEL,  _______, _______,                     KC_CLCK, KC_PSCR, KC_BTN3, KC_PAUS, KC_SLCK, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, _______,
     _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,   _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* NAVIGATION / KEYPAD
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │      │Insert│      │      │      │                  │      │ NumLk│ KP / │ KP * │ KP - │      │
+ * │      │      │Insert│Delete│      │      │                  │      │ NumLk│ KP / │ KP * │ KP - │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │ KP 4 │ KP 5 │ KP 6 │ KP + │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NVKP] = LAYOUT(
-    _______, _______, KC_INS,  _______, _______, _______,                   _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______,
+    _______, _______, KC_INS,  KC_DEL,  _______, _______,                   _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                   _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
     _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,                    KC_PDOT, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,  _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
