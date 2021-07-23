@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃  Tab │ Word↔            │      ┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Word↔            │      ┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │ Word←│ Word→│ Tab← │ Tab→ │      │╵    ╵      ╵    ╵│      │ Left │ Down │  Up  │ Right│      │
+ * │      │ Word←│ Word→│ Tab← │ Tab→ │ Tab  │╵    ╵      ╵    ╵│      │ Left │ Down │  Up  │ Right│      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │      ╷      │    │[NAV] │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
@@ -121,8 +121,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NAVIGATION] = LAYOUT(
     _______, _______, KC_INS,  _______, _______, _______,                     KC_CLCK, KC_PSCR, KC_BTN3, KC_PAUS, KC_SLCK, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, _______,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_TAB,                      _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
-    _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, _______,  _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
+    _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,   _______, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
                       _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
 ),
 /* RSYM(LMOD) + diaereses
@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
  * │   `  ┃   Á  ┃   ;  ┃   [  ┃   ]  ┃   '  │RGB VAL    RGB HUE│      ┃   ⇧  ┃   ⎈  ┃   ⌥  ┃   ◆  ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │ Sleep│ AltGr│      │      │
+ * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │      ╷      │    │      │[LSYM]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
     HU_GRV,  HU_AACU, HU_SCLN, HU_LBRC, HU_RBRC, HU_QUOT,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
-    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, KC_SLEP, OM_RALT, _______, _______,
+    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
                       _______, _______, _______, KC_DEL,  _______, _______, _______, _______, _______, _______
 ),
 /* ADJUST (LMOD + RMOD) + double acutes
@@ -189,23 +189,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* NAVIGATION / KEYPAD
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │      │Insert│      │      │      │                  │      │      │ KP / │ KP * │ KP - │      │
+ * │      │      │Insert│      │      │      │                  │      │ NumLk│ KP / │ KP * │ KP - │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │ KP 4 │ KP 5 │ KP 6 │ KP + │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │                  │ KP . ┃ KP 1 ┃ KP 2 ┃ KP 3 ┃ KP 0 ┃      │
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃   ⏎  │                  │ KP . ┃ KP 1 ┃ KP 2 ┃ KP 3 ┃ KP 0 ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │ Word←│ Word→│ Tab← │ Tab→ │      │╵    ╵      ╵    ╵│      │ KP 7 │ KP 8 │ KP 9 │ KP ⏎ │      │
+ * │      │ Word←│ Word→│ Tab← │ Tab→ │ Tab  │╵    ╵      ╵    ╵│      │ KP 7 │ KP 8 │ KP 9 │ KP ⏎ │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │[NVKP]│      ╷      │    │      │      │[NVKP]│      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
 [_NVKP] = LAYOUT(
-    _______, _______, KC_INS,  _______, _______, _______,                   _______, _______, KC_PSLS, KC_PAST, KC_PMNS, _______,
+    _______, _______, KC_INS,  _______, _______, _______,                   _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                   _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_TAB,                    KC_PDOT, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, _______,
-    _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,                    KC_PDOT, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, _______,
+    _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,  _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 [_LMOD] = LAYOUT(
@@ -299,18 +299,18 @@ uint8_t count_ones(uint8_t sample) {
 
 void render_modifiers(uint8_t mods) {
     static const char PROGMEM ctrl_4x[] = {
-        0x20, 0x85, 0x86, 0x87, 0x88,
-        0x20, 0xA5, 0xA6, 0xA7, 0xA8,
-        0x20, 0xC5, 0xC6, 0xC7, 0xC8,
+        0x20, 0xC3, 0xC4, 0xC5, 0xC6,
+        0x20, 0xC7, 0xC8, 0xC9, 0xCA,
+        0x20, 0xCB, 0xCC, 0xCD, 0xCB,
     0};
     static const char PROGMEM shift_4x[] = {
-        0x20, 0x20, 0x8A, 0x8B, 0x20,
-        0x20, 0xA9, 0xAA, 0xAB, 0xAC,
-        0x20, 0x20, 0xCA, 0xCB, 0x20,
+        0x20, 0x20, 0x92, 0x93, 0x20,
+        0x20, 0xCE, 0xCF, 0xD0, 0xD1,
+        0x20, 0x20, 0x91, 0x94, 0x20,
     0};
     static const char PROGMEM alt_4x[] = {
-        0x20, 0x8D, 0x8E, 0x8F, 0x90,
-        0x20, 0xAD, 0xAE, 0xAF, 0xB0,
+        0x20, 0x20, 0x20, 0x20, 0x20,
+        0x20, 0xBD, 0x9D, 0x9E, 0x9F,
         0x20, 0x20, 0x20, 0x20, 0x20,
     0};
     static const char PROGMEM gui_4x[] = {
@@ -318,10 +318,8 @@ void render_modifiers(uint8_t mods) {
         0x20, 0xB1, 0xB2, 0xB3, 0xB4,
         0x20, 0x20, 0xD2, 0xD3, 0x20,
     0};
-    static const char PROGMEM meh_4x[] = {
-        0x20, 0x20, 0x20, 0x20, 0x20,
+    static const char PROGMEM meh_1x[] = {
         0xD5, 0xD6, 0xD7, 0xD8, 0xD9,
-        0x20, 0x20, 0x20, 0x20, 0x20,
     0};
     static const char PROGMEM hyper_4x[] = {
         0x20, 0x20, 0xBE, 0xBF, 0x20,
@@ -338,11 +336,6 @@ void render_modifiers(uint8_t mods) {
     static const char PROGMEM gui_2x_top[] =      {0x9B, 0x9C, 0};
     static const char PROGMEM gui_2x_bottom[] =   {0xBB, 0xBC, 0};
 
-    static const char PROGMEM ctrl_1x[] =  {0x2A, 0};
-    static const char PROGMEM shift_1x[] = {0x9D, 0};
-    static const char PROGMEM alt_1x[] =   {0x9E, 0};
-    static const char PROGMEM gui_1x[] =   {0x9F, 0};
-
     // mods: (GASC)R(GASC)L
     uint8_t mod4 = (mods >> 4) | (mods & 0x0F);
     bool ctrl_on =  (mod4 & 0b00000001) == 0b00000001;
@@ -352,51 +345,51 @@ void render_modifiers(uint8_t mods) {
 
     if (mod4 == 0x0F) {
         oled_write_P(hyper_4x, false);
+        render_space();
         return;
     }
 
     if (mod4 == 0b00000111) {
-        oled_write_P(meh_4x, false);
+        render_space();
+        oled_write_P(meh_1x, false);
         render_space();
         render_space();
         return;
     }
 
-    if (count_ones(mod4) == 3) {
-        oled_write_P(PSTR("  "), false);
-        if (ctrl_on)  oled_write_P(ctrl_1x, false);
-        if (shift_on) oled_write_P(shift_1x, false);
-        if (alt_on)   oled_write_P(alt_1x, false);
-        if (gui_on)   oled_write_P(gui_1x, false);
-        render_space();
-        render_space();
+    if (count_ones(mod4) >= 2) {
+        oled_write_P(PSTR(" "), false);
+        if (ctrl_on)  oled_write_P(ctrl_2x_top, false);  else oled_write_P(PSTR("  "), false);
+        if (shift_on) oled_write_P(shift_2x_top, false); else oled_write_P(PSTR("  "), false);
+
+        oled_write_P(PSTR(" "), false);
+        if (ctrl_on)  oled_write_P(ctrl_2x_bottom, false);  else oled_write_P(PSTR("  "), false);
+        if (shift_on) oled_write_P(shift_2x_bottom, false); else oled_write_P(PSTR("  "), false);
+
+
+        oled_write_P(PSTR(" "), false);
+        if (alt_on)   oled_write_P(alt_2x_top, false); else oled_write_P(PSTR("  "), false);
+        if (gui_on)   oled_write_P(gui_2x_top, false); else oled_write_P(PSTR("  "), false);
+
+        oled_write_P(PSTR(" "), false);
+        if (alt_on)   oled_write_P(alt_2x_bottom, false); else oled_write_P(PSTR("  "), false);
+        if (gui_on)   oled_write_P(gui_2x_bottom, false); else oled_write_P(PSTR("  "), false);
+
         return;
     }
 
-    if (count_ones(mod4) == 2) {
-        oled_write_P(PSTR(" "), false);
-        if (ctrl_on)  oled_write_P(ctrl_2x_top, false);
-        if (shift_on) oled_write_P(shift_2x_top, false);
-        if (alt_on)   oled_write_P(alt_2x_top, false);
-        if (gui_on)   oled_write_P(gui_2x_top, false);
-        oled_write_P(PSTR(" "), false);
-        if (ctrl_on)  oled_write_P(ctrl_2x_bottom, false);
-        if (shift_on) oled_write_P(shift_2x_bottom, false);
-        if (alt_on)   oled_write_P(alt_2x_bottom, false);
-        if (gui_on)   oled_write_P(gui_2x_bottom, false);
-        render_space();
-        return;
-    }
 
     if (count_ones(mod4) == 1) {
         if (ctrl_on)  oled_write_P(ctrl_4x, false);
         if (shift_on) oled_write_P(shift_4x, false);
         if (alt_on)   oled_write_P(alt_4x, false);
         if (gui_on)   oled_write_P(gui_4x, false);
+        render_space();
         return;
     }
 
     if (count_ones(mod4) == 0) {
+        render_space();
         render_space();
         render_space();
         render_space();
@@ -414,45 +407,94 @@ void render_logo(void) {
 }
 
 void render_layer_state(void) {
-    if (IS_LAYER_ON(_QWERTZ))
-        oled_write_ln_P(PSTR(" BASE"), false);
-    else if (IS_LAYER_ON(_NAVIGATION))
-        oled_write_ln_P(PSTR(" NAV "), false);
-    else if (IS_LAYER_ON(_ADJUST))
-        oled_write_ln_P(PSTR(" ADJ "), false);
-    else if (IS_LAYER_ON(_NVKP))
-        oled_write_ln_P(PSTR("NV/KP"), false);
-    else if (IS_LAYER_ON(_RSYM))
-        oled_write_ln_P(PSTR(" RSYM"), false);
-    else if (IS_LAYER_ON(_LSYM))
-        oled_write_ln_P(PSTR(" LSYM"), false);
-    else
-        oled_write_ln_P(PSTR("     "), false);
+    static const char PROGMEM sym_top[] = {0x86, 0x87, 0x88, 0};
+    static const char PROGMEM sym_bot[] = {0xA6, 0xA7, 0xA8, 0};
+
+    static const char PROGMEM nav_top[] = {0x89, 0x8A, 0x8B, 0};
+    static const char PROGMEM nav_bot[] = {0xA9, 0xAA, 0xAB, 0};
+
+    static const char PROGMEM nkp_top[] = {0x8C, 0x8D, 0x8E, 0};
+    static const char PROGMEM nkp_bot[] = {0xAC, 0xAD, 0x8E, 0};
+
+    static const char PROGMEM adj_top[] = {0x20, 0x8F, 0x90, 0};
+    static const char PROGMEM adj_bot[] = {0xAE, 0xAF, 0x20, 0};
+
+
+    if (IS_LAYER_ON(_NAVIGATION)) {
+        oled_write_P(PSTR(" "), false);
+        oled_write_ln_P(nav_top, false);
+        oled_write_P(PSTR(" "), false);
+        oled_write_ln_P(nav_bot, false);
+    }
+    else if (IS_LAYER_ON(_ADJUST)) {
+        oled_write_P(PSTR(" "), false);
+        oled_write_ln_P(adj_top, false);
+        oled_write_P(PSTR(" "), false);
+        oled_write_ln_P(adj_bot, false);
+    }
+    else if (IS_LAYER_ON(_NVKP)) {
+        oled_write_P(PSTR(" "), false);
+        oled_write_ln_P(nkp_top, false);
+        oled_write_P(PSTR(" "), false);
+        oled_write_ln_P(nkp_bot, false);
+    }
+    else if (IS_LAYER_ON(_RSYM)) {
+        oled_write_P(PSTR(" "), false);
+        oled_write_P(sym_top, false);
+        oled_write_P(PSTR("\x85 "), false);
+        oled_write_P(sym_bot, false);
+        oled_write_P(PSTR("\xA5"), false);
+    }
+    else if (IS_LAYER_ON(_LSYM)) {
+        oled_write_P(PSTR("\x80"), false);
+        oled_write_P(sym_top, false);
+        oled_write_P(PSTR(" \xD4"), false);
+        oled_write_ln_P(sym_bot, false);
+    }
+    else {
+        render_space();
+        render_space();
+    }
 }
 
 void render_mod_layer_state(void) {
     if (IS_LAYER_ON(_LMOD))
-        oled_write_ln_P(PSTR(" LMOD"), false);
+        oled_write_P(PSTR("\x1BMOD "), false);
     else if (IS_LAYER_ON(_RMOD))
-        oled_write_ln_P(PSTR(" RMOD"), false);
+        oled_write_P(PSTR(" MOD\x1A"), false);
     else
-        oled_write_ln_P(PSTR("     "), false);
+        render_space();
+}
+
+void render_lock_state(led_t led_union) {
+    if (led_union.num_lock)
+        oled_write_P(PSTR(" NUM "), false);
+    else
+        render_space();
+
+    if (led_union.caps_lock)
+        oled_write_P(PSTR(" CAPS"), false);
+    else
+        render_space();
+
+    if (led_union.scroll_lock)
+        oled_write_P(PSTR(" SCRL"), false);
+    else
+        render_space();
 }
 
 void render_status_main(void) {
-    render_space();
-    render_logo();
-    render_space();
+    render_logo(); // 3
     render_space();
     render_space();
-    render_layer_state();
-    render_mod_layer_state();
+    render_layer_state(); // 2
+    render_mod_layer_state(); // 1
     render_space();
-    render_modifiers(get_mods() | get_oneshot_mods());
+    render_modifiers(get_mods() | get_oneshot_mods()); // 4
+    render_lock_state(host_keyboard_led_state()); // 3
 }
 
 void render_status_secondary(void) {
-    render_space();
     render_logo();
 }
 
@@ -465,7 +507,6 @@ void oled_task_user(void) {
 }
 
 #endif
-
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
