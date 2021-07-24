@@ -467,19 +467,22 @@ void render_mod_layer_state(void) {
 }
 
 void render_lock_state(led_t led_union) {
-    if (led_union.num_lock)
-        oled_write_P(PSTR(" NUM "), false);
-    else
+    if (led_union.num_lock) {
+        oled_write_char(7, false);
+        oled_write_P(PSTR("NUM "), false);
+    } else
         render_space();
 
-    if (led_union.caps_lock)
-        oled_write_P(PSTR(" CAPS"), false);
-    else
+    if (led_union.caps_lock) {
+        oled_write_char(7, false);
+        oled_write_P(PSTR("CAPS"), false);
+    } else
         render_space();
 
-    if (led_union.scroll_lock)
-        oled_write_P(PSTR(" SCRL"), false);
-    else
+    if (led_union.scroll_lock) {
+        oled_write_char(7, false);
+        oled_write_P(PSTR("SCRL"), false);
+    } else
         render_space();
 }
 
