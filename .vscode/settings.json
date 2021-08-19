@@ -12,5 +12,6 @@
     "MSYSTEM": "MINGW64",
     "CHERE_INVOKING": "1"
   },
-  "terminal.integrated.cursorStyle": "line"
+  "terminal.integrated.cursorStyle": "line",
+  "C_Cpp.errorSquiggles": "Disabled"
 }
