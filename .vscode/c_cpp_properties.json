@@ -54,7 +54,8 @@
             "forcedInclude": [
                 "D:/Data/qmk_firmware/keyboards/keycapsss/kimiko/kimiko.h",
                 "D:/Data/qmk_firmware/keyboards/keycapsss/kimiko/rev1/config.h",
-                "D:/Data/qmk_firmware/quantum/keymap_extras/keymap_hungarian.h"
+                "D:/Data/qmk_firmware/quantum/keymap_extras/keymap_hungarian.h",
+                "D:/Data/qmk_firmware/tmk_core/protocol/arm_atsam/clks.h"
             ]
         }
     ],
