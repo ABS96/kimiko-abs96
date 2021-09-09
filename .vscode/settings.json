@@ -1,5 +1,4 @@
 {
-  "terminal.integrated.defaultProfile.windows": "QMK MSYS",
   "terminal.integrated.profiles.windows": {
     "QMK MSYS": {
       "path": "E:\\Programs\\QMK_MSYS\\usr\\bin\\bash.exe",
@@ -8,10 +7,12 @@
       ]
     },
   },
+  "terminal.integrated.defaultProfile.windows": "QMK MSYS",
   "terminal.integrated.env.windows": {
     "MSYSTEM": "MINGW64",
     "CHERE_INVOKING": "1"
   },
+  "terminal.integrated.cwd": "D:\\Data\\qmk_firmware",
   "terminal.integrated.cursorStyle": "line",
   "C_Cpp.errorSquiggles": "Disabled",
   "C_Cpp.dimInactiveRegions": false
