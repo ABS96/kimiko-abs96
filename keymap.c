@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
  * │   `  ┃   Á  ┃   =  ┃   [  ┃   ]  ┃   '  │ val↕        Tab↔ │      ┃   ⇧  ┃   ⎈  ┃   ⌥  ┃   ◆  ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │      │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
+ * │   °  │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │      ╷      │    │      │[LSYM]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
     HU_GRV,  HU_AACU, HU_EQL,  HU_LBRC, HU_RBRC, HU_QUOT,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
-    _______, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
+    HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
                       _______, _______, _______, KC_DEL,  _______, _______, _______, _______, _______, _______
 ),
 /* ADJUST (LMOD + RMOD) + double acutes
@@ -519,9 +519,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             case _QWERTZ:
                 // Mouse scroll Up/Down
                 if (clockwise) {
-                    tap_code(KC_WH_D);
-                } else {
                     tap_code(KC_WH_U);
+                } else {
+                    tap_code(KC_WH_D);
                 }
                 break;
 
