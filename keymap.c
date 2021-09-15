@@ -171,8 +171,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │ RESET│      │      │      │      │      │                  │      │      │      │      │      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │      │                  │      │   Ű  │ Play │   Ő  │      │      │
- * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃      │                  │      ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃      │ Spd↕             │      ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │ DEBUG│      │ Wake │ Sleep│      │      │╵    ╵      ╵    ╵│      │ Rwnd │ Mute │ Stop │ Ffwd │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
@@ -558,6 +558,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     rgblight_increase_val();
                 }
                 break;
+            
+            case _ADJUST:
+                // RGB speed ↕
+                if (clockwise) {
+                    rgblight_decrease_speed();
+                } else {
+                    rgblight_increase_speed();
+                }
         }
     }
     // Right encoder
