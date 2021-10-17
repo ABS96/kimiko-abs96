@@ -35,17 +35,19 @@
 #define RGBLIGHT_VAL_STEP 8
 #define RGBLIGHT_SLEEP /* the RGB lighting will be switched off when the host goes to sleep */
 /*== all animations enable ==*/
-#define RGBLIGHT_ANIMATIONS
+// #define RGBLIGHT_ANIMATIONS
 /*== or choose animations to save space ==*/
-// #   define RGBLIGHT_EFFECT_BREATHING
-// #   define RGBLIGHT_EFFECT_RAINBOW_MOOD
-// #   define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-// #   define RGBLIGHT_EFFECT_SNAKE
-// #   define RGBLIGHT_EFFECT_KNIGHT
-// #   define RGBLIGHT_EFFECT_CHRISTMAS
-// #   define RGBLIGHT_EFFECT_STATIC_GRADIENT
-// #   define RGBLIGHT_EFFECT_RGB_TEST
-// #   define RGBLIGHT_EFFECT_ALTERNATING
+#define RGBLIGHT_EFFECT_STATIC
+#define RGBLIGHT_EFFECT_STATIC_GRADIENT
+// #define RGBLIGHT_EFFECT_ALTERNATING // left-right
+// #define RGBLIGHT_EFFECT_BREATHING
+// #define RGBLIGHT_EFFECT_CHRISTMAS // red and green, fading
+// #define RGBLIGHT_EFFECT_KNIGHT // Knight Rider
+// #define RGBLIGHT_EFFECT_RAINBOW_MOOD // fading, single colour
+// #define RGBLIGHT_EFFECT_RAINBOW_SWIRL // continuous fade, time shift by location
+// #define RGBLIGHT_EFFECT_RGB_TEST // R, G, B
+// #define RGBLIGHT_EFFECT_SNAKE
+// #define RGBLIGHT_EFFECT_TWINKLE // random keys
 #endif
 
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
