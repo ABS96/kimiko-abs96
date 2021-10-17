@@ -1,11 +1,10 @@
-OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
-ENCODER_ENABLE = yes       # Enables the use of one or more encoders
-RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
+ENCODER_ENABLE = yes
 
-# LTO: Link Time Optimizations.
-# Reduce compiled size, but will automatically disable the legacy TMK Macros and Functions features.
-# This does not affect QMK Macros and Layers
+OLED_DRIVER_ENABLE = yes
+RGBLIGHT_ENABLE = yes
+MOUSEKEY_ENABLE = yes
+
 LTO_ENABLE = yes
 BOOTLOADER = caterina      # Compile for Pro Micro 
 
-MOUSEKEY_ENABLE = yes
+SRC += features/oled.c

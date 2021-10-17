@@ -21,7 +21,7 @@
 #include QMK_KEYBOARD_H
 #endif
 #include "keymap_hungarian.h"
-// #include <stdio.h>
+#include "features/oled.h"
 
 enum layers {
     _QWERTZ,
@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │      │      │      │      │      │╵    ╵      ╵    ╵│   ~  │   {  │   }  │   %  │   *  │   :  │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │[RSYM]╷      │    │ Esc  │      │      │      │      │
+ *               │      │      │      │[RSYM]╷      │    │ Esc  │  ADJ │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_RSYM] = LAYOUT(
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,                   HU_DLR,  HU_UDIA, HU_EXLM, HU_ODIA, HU_PLUS, HU_MINS,
     _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_SCLN, KC_DEL,  HU_UNDS,
     _______, _______, _______, _______, _______, _______, _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, HU_COLN,
-                      _______, _______, _______, _______, _______, KC_ESC,  _______, _______, _______, _______
+                      _______, _______, _______, _______, _______, _______, LAY_ADJ, _______, _______, _______
 ),
 /* LSYM(RMOD) + acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
@@ -158,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │   °  │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │      ╷      │    │      │[LSYM]│      │      │      │
+ *               │      │      │      │  ADJ ╷      │    │      │[LSYM]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
     HU_GRV,  HU_AACU, HU_EQL,  HU_LBRC, HU_RBRC, HU_QUOT,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
     HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
-                      _______, _______, _______, KC_DEL,  _______, _______, _______, _______, _______, _______
+                      _______, _______, _______, LAY_ADJ, _______, _______, _______, _______, _______, _______
 ),
 /* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
@@ -250,10 +250,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    state = update_tri_layer_state(state, _LSYM, _RSYM, _ADJUST);
-    return state;
-}
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//     state = update_tri_layer_state(state, _RSYM, _LSYM, _ADJUST);
+//     return state;
+// }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {    
     // One-shot modifier fire detection
@@ -309,226 +309,19 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     }
 }
 
-void render_space(void) {
-    oled_write_P(PSTR("     "), false);
-}
-
-uint8_t count_ones(uint8_t sample) {
-    static const uint8_t LUT4[16] = {
-        0, 1, 1, 2, 1, 2, 2, 3,
-        1, 2, 2, 3, 2, 3, 3, 4
-    };
-
-    return LUT4[sample & 0x0F];
-}
-
-void render_modifiers(uint8_t mods) {
-    static const char PROGMEM ctrl_4x[] = {
-        0x20, 0xC3, 0xC4, 0xC5, 0xC6,
-        0x20, 0xC7, 0xC8, 0xC9, 0xCA,
-        0x20, 0xCB, 0xCC, 0xCD, 0xCB,
-    0};
-    static const char PROGMEM shift_4x[] = {
-        0x20, 0x20, 0x92, 0x93, 0x20,
-        0x20, 0xCE, 0xCF, 0xD0, 0xD1,
-        0x20, 0x20, 0x91, 0x94, 0x20,
-    0};
-    static const char PROGMEM alt_4x[] = {
-        0x20, 0x20, 0x20, 0x20, 0x20,
-        0x20, 0xBD, 0x9D, 0x9E, 0x9F,
-        0x20, 0x20, 0x20, 0x20, 0x20,
-    0};
-    static const char PROGMEM gui_4x[] = {
-        0x20, 0x20, 0x92, 0x93, 0x20,
-        0x20, 0xB1, 0xB2, 0xB3, 0xB4,
-        0x20, 0x20, 0xD2, 0xD3, 0x20,
-    0};
-    static const char PROGMEM meh_1x[] = {
-        0xD5, 0xD6, 0xD7, 0xD8, 0xD9,
-    0};
-    static const char PROGMEM hyper_4x[] = {
-        0x20, 0x20, 0xBE, 0xBF, 0x20,
-        0x20, 0xDA, 0xDB, 0xDC, 0xDD,
-        0x20, 0x20, 0xDE, 0xDF, 0x20,
-    0};
-
-    static const char PROGMEM ctrl_2x_top[] =     {0x95, 0x96, 0};
-    static const char PROGMEM ctrl_2x_bottom[] =  {0xB5, 0xB6, 0};
-    static const char PROGMEM shift_2x_top[] =    {0x97, 0x98, 0};
-    static const char PROGMEM shift_2x_bottom[] = {0xB7, 0xB8, 0};
-    static const char PROGMEM alt_2x_top[] =      {0x99, 0x9A, 0};
-    static const char PROGMEM alt_2x_bottom[] =   {0xB9, 0xBA, 0};
-    static const char PROGMEM gui_2x_top[] =      {0x9B, 0x9C, 0};
-    static const char PROGMEM gui_2x_bottom[] =   {0xBB, 0xBC, 0};
-
-    // mods: (GASC)R(GASC)L
-    uint8_t mod4 = (mods >> 4) | (mods & 0x0F);
-    bool ctrl_on =  (mod4 & 0b00000001) == 0b00000001;
-    bool shift_on = (mod4 & 0b00000010) == 0b00000010;
-    bool alt_on =   (mod4 & 0b00000100) == 0b00000100;
-    bool gui_on =   (mod4 & 0b00001000) == 0b00001000;
-
-    if (mod4 == 0x0F) {
-        oled_write_P(hyper_4x, false);
-        render_space();
-        return;
-    }
-
-    if (mod4 == 0b00000111) {
-        render_space();
-        oled_write_P(meh_1x, false);
-        render_space();
-        render_space();
-        return;
-    }
-
-    if (count_ones(mod4) >= 2) {
-        oled_write_P(PSTR(" "), false);
-        if (ctrl_on)  oled_write_P(ctrl_2x_top, false);  else oled_write_P(PSTR("  "), false);
-        if (shift_on) oled_write_P(shift_2x_top, false); else oled_write_P(PSTR("  "), false);
-
-        oled_write_P(PSTR(" "), false);
-        if (ctrl_on)  oled_write_P(ctrl_2x_bottom, false);  else oled_write_P(PSTR("  "), false);
-        if (shift_on) oled_write_P(shift_2x_bottom, false); else oled_write_P(PSTR("  "), false);
-
-
-        oled_write_P(PSTR(" "), false);
-        if (alt_on)   oled_write_P(alt_2x_top, false); else oled_write_P(PSTR("  "), false);
-        if (gui_on)   oled_write_P(gui_2x_top, false); else oled_write_P(PSTR("  "), false);
-
-        oled_write_P(PSTR(" "), false);
-        if (alt_on)   oled_write_P(alt_2x_bottom, false); else oled_write_P(PSTR("  "), false);
-        if (gui_on)   oled_write_P(gui_2x_bottom, false); else oled_write_P(PSTR("  "), false);
-
-        return;
-    }
-
-
-    if (count_ones(mod4) == 1) {
-        if (ctrl_on)  oled_write_P(ctrl_4x, false);
-        if (shift_on) oled_write_P(shift_4x, false);
-        if (alt_on)   oled_write_P(alt_4x, false);
-        if (gui_on)   oled_write_P(gui_4x, false);
-        render_space();
-        return;
-    }
-
-    if (count_ones(mod4) == 0) {
-        render_space();
-        render_space();
-        render_space();
-        render_space();
-        return;
-    }
-}
-
-void render_logo(void) {
-    static const char PROGMEM ABS_logo[] = {
-        0x20, 0x81, 0x82, 0x83, 0x84,
-        0xA0, 0xA1, 0xA2, 0xA3, 0xA4,
-        0xC0, 0xC1, 0xC2, 0x20, 0x20,
-    0};
-    oled_write_P(ABS_logo, false);
-}
-
-void render_layer_state(void) {
-    static const char PROGMEM sym_top[] = {0x86, 0x87, 0x88, 0};
-    static const char PROGMEM sym_bot[] = {0xA6, 0xA7, 0xA8, 0};
-
-    static const char PROGMEM nav_top[] = {0x89, 0x8A, 0x8B, 0};
-    static const char PROGMEM nav_bot[] = {0xA9, 0xAA, 0xAB, 0};
-
-    static const char PROGMEM nkp_top[] = {0x8C, 0x8D, 0x8E, 0};
-    static const char PROGMEM nkp_bot[] = {0xAC, 0xAD, 0x8E, 0};
-
-    static const char PROGMEM adj_top[] = {0x20, 0x8F, 0x90, 0};
-    static const char PROGMEM adj_bot[] = {0xAE, 0xAF, 0x20, 0};
-
-
-    if (IS_LAYER_ON(_NAVIGATION)) {
-        oled_write_P(PSTR(" "), false);
-        oled_write_ln_P(nav_top, false);
-        oled_write_P(PSTR(" "), false);
-        oled_write_ln_P(nav_bot, false);
-    }
-    else if (IS_LAYER_ON(_ADJUST)) {
-        oled_write_P(PSTR(" "), false);
-        oled_write_ln_P(adj_top, false);
-        oled_write_P(PSTR(" "), false);
-        oled_write_ln_P(adj_bot, false);
-    }
-    else if (IS_LAYER_ON(_NVKP)) {
-        oled_write_P(PSTR(" "), false);
-        oled_write_ln_P(nkp_top, false);
-        oled_write_P(PSTR(" "), false);
-        oled_write_ln_P(nkp_bot, false);
-    }
-    else if (IS_LAYER_ON(_RSYM)) {
-        oled_write_P(PSTR(" "), false);
-        oled_write_P(sym_top, false);
-        oled_write_P(PSTR("\x85 "), false);
-        oled_write_P(sym_bot, false);
-        oled_write_P(PSTR("\xA5"), false);
-    }
-    else if (IS_LAYER_ON(_LSYM)) {
-        oled_write_P(PSTR("\x80"), false);
-        oled_write_P(sym_top, false);
-        oled_write_P(PSTR(" \xD4"), false);
-        oled_write_ln_P(sym_bot, false);
-    }
-    else {
-        render_space();
-        render_space();
-    }
-}
-
-void render_mod_layer_state(void) {
-    if (IS_LAYER_ON(_LMOD))
-        oled_write_P(PSTR("\x1BMOD "), false);
-    else if (IS_LAYER_ON(_RMOD))
-        oled_write_P(PSTR(" MOD\x1A"), false);
-    else
-        render_space();
-}
-
-void render_lock_state(led_t led_union) {
-    if (led_union.num_lock) {
-        oled_write_char(7, false);
-        oled_write_P(PSTR("NUM "), false);
-    } else
-        render_space();
-
-    if (led_union.caps_lock) {
-        oled_write_char(7, false);
-        oled_write_P(PSTR("CAPS"), false);
-    } else
-        render_space();
-
-    if (led_union.scroll_lock) {
-        oled_write_char(7, false);
-        oled_write_P(PSTR("SCRL"), false);
-    } else
-        render_space();
-}
-
-void render_status_main(void) {
-    render_logo(); // 3
-    render_space();
-    render_space();
-    render_layer_state(); // 2
-    render_mod_layer_state(); // 1
-    render_space();
-    render_modifiers(get_mods() | get_oneshot_mods()); // 4
-    render_lock_state(host_keyboard_led_state()); // 3
-}
-
-void render_status_secondary(void) {
-    render_logo();
-}
-
 void oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+        char layerStates = {
+            IS_LAYER_ON(_NAVIGATION)  |
+            IS_LAYER_ON(_ADJUST) << 1 |
+            IS_LAYER_ON(_NVKP)   << 2 |
+            IS_LAYER_ON(_RSYM)   << 3 |
+            IS_LAYER_ON(_LSYM)   << 4 |
+            IS_LAYER_ON(_RMOD)   << 5 |
+            IS_LAYER_ON(_LMOD)   << 6 |
+            IS_LAYER_ON(_WASD)   << 7
+        };
+        render_status_primary(layerStates);  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         render_status_secondary();
     }
