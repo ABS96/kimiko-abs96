@@ -98,8 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               │   ◆  │   ⌥  │NAV/KP│ RSYM ╷Space │    │ NAV/⏎╷ LSYM │NAV/KP│   ⌥  │   ◆  │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
- [_QWERTZ] = LAYOUT(
+[_QWERTZ] = LAYOUT(
     KC_ESC,  HU_1,    HU_2,    HU_3,    HU_4,    HU_5,                      HU_6,    HU_7,    HU_8,    HU_9,    HU_0,    KC_ESC,
     KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    KC_F13,
     KC_LSFT, HU_A,    HU_S,    HU_D,    HU_F,    HU_G,                      HU_H,    HU_J,    HU_K,    HU_L,    KC_BSPC, KC_RSFT,
@@ -120,7 +119,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               │      │      │      │      ╷      │    │[NAV] │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
 [_NAVIGATION] = LAYOUT(
     _______, _______, KC_INS,  _______, _______, LAY_ASD,                     _______, _______, KC_BTN3, KC_PAUS, _______, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, KC_CLCK,
@@ -128,6 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,   KC_LSFT, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
                       _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
 ),
+
 /* RSYM(LMOD) + diaereses
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
@@ -148,6 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, HU_COLN,
                       _______, _______, _______, _______, _______, _______, LAY_ADJ, _______, _______, _______
 ),
+
 /* LSYM(RMOD) + acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
@@ -161,7 +161,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               │      │      │      │  ADJ ╷      │    │      │[LSYM]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
 [_LSYM] = LAYOUT(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
@@ -169,6 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
                       _______, _______, _______, LAY_ADJ, _______, _______, _______, _______, _______, _______
 ),
+
 /* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │ RESET│      │      │      │      │      │                  │      │      │      │      │      │      │
@@ -182,7 +182,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               │      │      │      │ [ADJ]╷      │    │      │ [ADJ]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
 [_ADJUST] = LAYOUT(
     RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, KC_MPLY, HU_ODAC, XXXXXXX, XXXXXXX,
@@ -190,6 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
+
 /* NAVIGATION / KEYPAD
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │      │      │Insert│      │      │      │                  │      │ NumLk│ KP / │ KP * │ KP - │      │
@@ -203,7 +203,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               │      │      │[NVKP]│      ╷      │    │      │      │[NVKP]│      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
 [_NVKP] = LAYOUT(
     _______, _______, KC_INS,  _______, _______, _______,                   _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,                    _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
@@ -211,6 +210,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,  KC_LSFT, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
+
 [_LMOD] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
@@ -226,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
-/* BLANK
+/* WASD
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │      │      │      │      │      │ BASE │                  │      │      │      │      │      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
@@ -239,7 +239,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               │      │      │      │      ╷      │    │      │      │      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
-
 [_WASD] = LAYOUT(
     _______, _______, _______, _______, _______, LAY_BAS,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, HU_W,    _______, _______,                   _______, _______, KC_UP,   _______, _______, _______,
@@ -248,12 +247,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 )
 };
-
-
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//     state = update_tri_layer_state(state, _RSYM, _LSYM, _ADJUST);
-//     return state;
-// }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {    
     // One-shot modifier fire detection
@@ -296,11 +289,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+#ifdef OLED_DRIVER_ENABLE
 void suspend_power_down_user() {
     oled_off();
 }
 
-#ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (is_keyboard_master()) {
         return OLED_ROTATION_270;
@@ -326,8 +319,7 @@ void oled_task_user(void) {
         render_status_secondary();
     }
 }
-
-#endif
+#endif // OLED_DRIVER_ENABLE
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
@@ -336,22 +328,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         switch (get_highest_layer(layer_state)) {
             case _QWERTZ:
                 // Mouse scroll Up/Down
-                if (clockwise) {
-                    tap_code(KC_WH_U);
-                } else {
-                    tap_code(KC_WH_D);
-                }
+                if (clockwise) tap_code(KC_WH_U); else tap_code(KC_WH_D);
                 break;
 
             case _NAVIGATION:
             case _NVKP:
-
                 // Scroll by Word
-                if (clockwise) {
-                    tap_code16(LCTL(KC_LEFT));
-                } else {
-                    tap_code16(LCTL(KC_RGHT));
-                }
+                if (clockwise) tap_code16(LCTL(KC_LEFT)); else tap_code16(LCTL(KC_RGHT));
                 break;
 
 
@@ -370,20 +353,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             case _RSYM:
             case _LMOD:
                 // RGB brightness ↕
-                if (clockwise) {
-                    rgblight_decrease_val();
-                } else {
-                    rgblight_increase_val();
-                }
+                if (clockwise) rgblight_decrease_val(); else rgblight_increase_val();
                 break;
             
             case _ADJUST:
                 // RGB speed ↕
-                if (clockwise) {
-                    rgblight_decrease_speed();
-                } else {
-                    rgblight_increase_speed();
-                }
+                if (clockwise) rgblight_decrease_speed(); else rgblight_increase_speed();
+                break;
         }
     }
     // Right encoder
@@ -391,43 +367,27 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         switch (get_highest_layer(layer_state)) {
             case _QWERTZ:
                 // Volume Up/Down
-                if (clockwise) {
-                    tap_code(KC_VOLU);
-                } else {
-                    tap_code(KC_VOLD);
-                }
+                if (clockwise) tap_code(KC_VOLU); else tap_code(KC_VOLD);
                 break;
 
             case _NAVIGATION:
             case _NVKP:
                 // Mouse scroll ↔
-                if (clockwise) {
-                    tap_code(KC_WH_R);
-                } else {
-                    tap_code(KC_WH_L);
-                }
+                if (clockwise) tap_code(KC_WH_R); else tap_code(KC_WH_L);
                 break;
 
             // Left thumb key
             case _RSYM:
             case _LMOD:
                 // Switch tab
-                if (clockwise) {
-                    tap_code16(LCTL(KC_TAB));
-                } else {
-                    tap_code16(LSFT(LCTL(KC_TAB)));
-                }
+                if (clockwise) tap_code16(LCTL(KC_TAB)); else tap_code16(LSFT(LCTL(KC_TAB)));
                 break;
 
             // Right thumb key
             case _LSYM:
             case _RMOD:
                 // RGB hue ↕
-                if (clockwise) {
-                    rgblight_increase_hue();
-                } else {
-                    rgblight_decrease_hue();
-                }
+                if (clockwise) rgblight_increase_hue(); else rgblight_decrease_hue();
                 break;
         }
     }
