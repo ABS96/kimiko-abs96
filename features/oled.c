@@ -1,5 +1,5 @@
 #include "oled.h"
-// #include <stdio.h>
+#include "capsword.h"
 
 void render_space(void) {
   oled_write_P(PSTR("     "), false);
@@ -197,7 +197,10 @@ void render_lock_state(led_t led_union) {
 
   if (led_union.caps_lock) {
     oled_write_char(7, false);
-    oled_write_P(PSTR("CAPS"), false);
+    if (capsword_enabled())
+      oled_write_P(PSTR("CWRD"), false);
+    else
+      oled_write_P(PSTR("CAPS"), false);
   } else
     render_space();
 

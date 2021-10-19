@@ -22,6 +22,7 @@
 #endif
 #include "keymap_hungarian.h"
 #include "features/oled.h"
+#include "features/capsword.h"
 
 enum layers {
     _QWERTZ,
@@ -51,7 +52,7 @@ enum custom_keycodes {
     OM_RALT,
     OM_RGUI,
 
-    // CAPSWRD
+    CAPSWRD
 };
 
 uint16_t om_keycodes[] = {
@@ -65,9 +66,6 @@ uint16_t om_keycodes[] = {
     KC_RGUI
 };
 uint16_t om_count = 0;
-
-// uint16_t debug_kc = 0;
-bool capsword = false;
 
 #define LAY_BAS TO(_QWERTZ)
 #define LAY_RSM MO(_RSYM)
@@ -89,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │  Esc │   1  │   2  │   3  │   4  │   5  │                  │   6  │   7  │   8  │   9  │   0  │ Esc  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │  Tab │   Q  │   W  │   E  │   R  │   T  │                  │   Z  │   U  │   I  │   O  │   P  │F13CWD│
+ * │  Tab │   Q  │   W  │   E  │   R  │   T  │                  │   Z  │   U  │   I  │   O  │   P  │CAPSWD│
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
  * │   ⇧  ┃   A  ┃   S  ┃   D  ┃   F  ┃   G  │ Scl↕        Vol↕ │   H  ┃   J  ┃   K  ┃   L  ┃BackSp┃   ⇧  │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
@@ -100,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_QWERTZ] = LAYOUT(
     KC_ESC,  HU_1,    HU_2,    HU_3,    HU_4,    HU_5,                      HU_6,    HU_7,    HU_8,    HU_9,    HU_0,    KC_ESC,
-    KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    KC_F13,
+    KC_TAB,  HU_Q,    HU_W,    HU_E,    HU_R,    HU_T,                      HU_Z,    HU_U,    HU_I,    HU_O,    HU_P,    CAPSWRD,
     KC_LSFT, HU_A,    HU_S,    HU_D,    HU_F,    HU_G,                      HU_H,    HU_J,    HU_K,    HU_L,    KC_BSPC, KC_RSFT,
     KC_LCTL, HU_Y,    HU_X,    HU_C,    HU_V,    HU_B,    KC_MPLY, KC_MUTE, HU_N,    HU_M,    HU_COMM, HU_DOT,  HU_MINS, KC_RCTL,
              KC_LGUI, KC_LALT, LAY_NKP, LAY_RSM, KC_SPC,  ENT_NAV, LAY_LSM, LAY_NKP, KC_LALT, KC_RGUI
@@ -248,7 +246,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {    
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // One-shot modifier fire detection
     if (IS_LAYER_ON(_LMOD) || IS_LAYER_ON(_RMOD)) {
         if (OM_LSFT <= keycode && keycode <= OM_RGUI) {
@@ -285,6 +283,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         ++om_count; // Remember that one mod key is being held
         return false;
     }
+
+    if (keycode == CAPSWRD && record->event.pressed) {
+        capsword_toggle();
+        return false;
+    }
+
+    if (!process_capsword(keycode, record))
+        return false;
 
     return true;
 }
