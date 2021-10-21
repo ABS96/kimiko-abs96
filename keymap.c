@@ -44,14 +44,14 @@ enum layers {
 };
 
 enum custom_keycodes {
-    OM_LSFT = SAFE_RANGE,
-    OM_LCTL,
-    OM_LALT,
-    OM_LGUI,
-    OM_RSFT,
-    OM_RCTL,
-    OM_RALT,
-    OM_RGUI,
+    HR_LSFT = SAFE_RANGE,
+    HR_LCTL,
+    HR_LALT,
+    HR_LGUI,
+    HR_RSFT,
+    HR_RCTL,
+    HR_RALT,
+    HR_RGUI,
 
     CAPSWRD,
     FULWDTH,
@@ -61,7 +61,7 @@ enum custom_keycodes {
     SANSBIT
 };
 
-uint16_t om_keycodes[] = {
+uint16_t hrm_keycodes[] = {
     KC_LSFT,
     KC_LCTL,
     KC_LALT,
@@ -71,7 +71,7 @@ uint16_t om_keycodes[] = {
     KC_RALT,
     KC_RGUI
 };
-uint16_t om_count = 0;
+uint16_t hrm_count = 0;
 
 #define LAY_BAS TO(_QWERTZ)
 #define LAY_RSM MO(_RSYM)
@@ -147,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RSYM] = LAYOUT(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, _______, _______, _______, _______, _______,                   HU_DLR,  HU_UDIA, HU_EXLM, HU_ODIA, HU_PLUS, HU_MINS,
-    _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_SCLN, KC_DEL,  HU_UNDS,
+    _______, HR_LGUI, HR_LALT, HR_LCTL, HR_LSFT, _______,                   HU_DQUO, HU_LPRN, HU_RPRN, HU_SCLN, KC_DEL,  HU_UNDS,
     _______, _______, _______, _______, _______, _______, _______, _______, HU_TILD, HU_LCBR, HU_RCBR, HU_PERC, HU_ASTR, HU_COLN,
                       _______, _______, _______, _______, _______, _______, LAY_ADJ, _______, _______, _______
 ),
@@ -168,8 +168,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LSYM] = LAYOUT(
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
-    HU_GRV,  HU_AACU, HU_EQL,  HU_LBRC, HU_RBRC, HU_QUOT,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
-    HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, OM_RALT, _______, _______,
+    HU_GRV,  HU_AACU, HU_EQL,  HU_LBRC, HU_RBRC, HU_QUOT,                   _______, HR_RSFT, HR_RCTL, HR_LALT, HR_RGUI, _______,
+    HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, HR_RALT, _______, _______,
                       _______, _______, _______, LAY_ADJ, _______, _______, _______, _______, _______, _______
 ),
 
@@ -218,15 +218,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LMOD] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-    _______, OM_LGUI, OM_LALT, OM_LCTL, OM_LSFT, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, HR_LGUI, HR_LALT, HR_LCTL, HR_LSFT, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 [_RMOD] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,                   _______, OM_RSFT, OM_RCTL, OM_LALT, OM_RGUI, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, OM_RALT, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, HR_RSFT, HR_RCTL, HR_LALT, HR_RGUI, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, HR_RALT, _______, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -253,16 +253,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // One-shot modifier fire detection
+    // Home row modifier fire detection
     if (IS_LAYER_ON(_LMOD) || IS_LAYER_ON(_RMOD)) {
-        if (OM_LSFT <= keycode && keycode <= OM_RGUI) {
+        if (HR_LSFT <= keycode && keycode <= HR_RGUI) {
             if (record->event.pressed) {
-                register_code(om_keycodes[keycode - SAFE_RANGE]);
-                ++om_count;
+                register_code(hrm_keycodes[keycode - SAFE_RANGE]);
+                ++hrm_count;
             } else {
-                unregister_code(om_keycodes[keycode - SAFE_RANGE]);
-                --om_count;
-                if (om_count < 1) {
+                unregister_code(hrm_keycodes[keycode - SAFE_RANGE]);
+                --hrm_count;
+                if (hrm_count < 1) {
                     layer_off(_LMOD);
                     layer_off(_RMOD);
                 }
@@ -270,10 +270,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
 
-    // One-shot modifier entry point
+    // Home row modifier entry point
     if (
-        (om_count == 0) // no one-shot modifiers are currently held and
-        && (OM_LSFT <= keycode && keycode <= OM_RGUI) // a one-shot mod
+        (hrm_count == 0) // no one-shot modifiers are currently held and
+        && (HR_LSFT <= keycode && keycode <= HR_RGUI) // a one-shot mod
         && record->event.pressed                      // was pressed
     ) {
         if (IS_LAYER_ON(_RSYM)) {
@@ -285,8 +285,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_RMOD);
         }
 
-        register_code(om_keycodes[keycode - SAFE_RANGE]); // Hold modifier
-        ++om_count; // Remember that one mod key is being held
+        register_code(hrm_keycodes[keycode - SAFE_RANGE]); // Hold modifier
+        ++hrm_count; // Remember that one mod key is being held
         return false;
     }
 
