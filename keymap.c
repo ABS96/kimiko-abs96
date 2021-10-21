@@ -23,6 +23,7 @@
 #include "keymap_hungarian.h"
 #include "features/oled.h"
 #include "features/capsword.h"
+#include "features/decolayer.h"
 
 enum layers {
     _QWERTZ,
@@ -52,7 +53,12 @@ enum custom_keycodes {
     OM_RALT,
     OM_RGUI,
 
-    CAPSWRD
+    CAPSWRD,
+    FULWDTH,
+    MATHBLD,
+    SANSBLD,
+    SANSITL,
+    SANSBIT
 };
 
 uint16_t om_keycodes[] = {
@@ -169,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │ RESET│      │      │      │      │      │                  │      │      │      │      │      │      │
+ * │ RESET│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │      │      │      │      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │      │                  │      │   Ű  │ Play │   Ő  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
@@ -181,7 +187,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_ADJUST] = LAYOUT(
-    RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    RESET,   FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, KC_MPLY, HU_ODAC, XXXXXXX, XXXXXXX,
     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
     XXXXXXX, XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
@@ -284,12 +290,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    if (keycode == CAPSWRD && record->event.pressed) {
-        capsword_toggle();
-        return false;
+    switch (keycode) {
+        case CAPSWRD:
+            if (record->event.pressed) {
+                capsword_toggle();
+            }
+            return false;
+        case FULWDTH:
+            if (record->event.pressed) {
+                deco_on(DECO_FULLWIDTH);
+            }
+            return false;
+        case MATHBLD:
+            if (record->event.pressed) {
+                deco_on(DECO_MATHBOLD);
+            }
+            return false;
+        case SANSBLD:
+            if (record->event.pressed) {
+                deco_on(DECO_SANSBOLD);
+            }
+            return false;
+        case SANSITL:
+            if (record->event.pressed) {
+                deco_on(DECO_SANSITAL);
+            }
+            return false;
+        case SANSBIT:
+            if (record->event.pressed) {
+                deco_on(DECO_SANSBOIT);
+            }
+            return false;
     }
 
     if (!process_capsword(keycode, record))
+        return false;
+    
+    if (!process_decolayer(keycode, record))
         return false;
 
     return true;

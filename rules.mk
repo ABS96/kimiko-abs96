@@ -9,3 +9,4 @@ BOOTLOADER = caterina      # Compile for Pro Micro
 
 SRC += features/oled.c
 SRC += features/capsword.c
+SRC += features/decolayer.c

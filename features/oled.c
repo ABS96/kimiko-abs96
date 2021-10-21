@@ -1,5 +1,6 @@
 #include "oled.h"
 #include "capsword.h"
+#include "decolayer.h"
 
 void render_space(void) {
   oled_write_P(PSTR("     "), false);
@@ -211,10 +212,36 @@ void render_lock_state(led_t led_union) {
     render_space();
 }
 
+void render_deco_layer_state(void) {
+  switch(get_deco_state()) {
+    case DECO_FULLWIDTH:
+      oled_write_P(PSTR("FullW"), false);
+      break;
+    case DECO_MATHBOLD:
+      oled_write_P(PSTR("MthBo"), false);
+      break;
+    case DECO_SANS:
+      oled_write_P(PSTR("SansS"), false);
+      break;
+    case DECO_SANSBOLD:
+      oled_write_P(PSTR("SansB"), false);
+      break;
+    case DECO_SANSITAL:
+      oled_write_P(PSTR("SansI"), false);
+      break;
+    case DECO_SANSBOIT:
+      oled_write_P(PSTR("SnsBI"), false);
+      break;
+    default:
+      render_space();
+      break;
+  }
+}
+
 void render_status_primary(char layerStates) {
   render_logo(); // 3
   render_space();
-  render_space();
+  render_deco_layer_state();
   render_layer_state(layerStates); // 2
   render_mod_layer_state(layerStates); // 1
   render_space();
