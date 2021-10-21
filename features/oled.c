@@ -190,6 +190,13 @@ void render_mod_layer_state(char layerStates) {
 }
 
 void render_lock_state(led_t led_union) {
+  if (led_union.compose) {
+    oled_write_char(7, false);
+    oled_write_P(PSTR("CMPS"), false);
+  }
+  else
+    render_space();
+
   if (led_union.num_lock) {
     oled_write_char(7, false);
     oled_write_P(PSTR("NUM "), false);
@@ -244,7 +251,6 @@ void render_status_primary(char layerStates) {
   render_deco_layer_state();
   render_layer_state(layerStates); // 2
   render_mod_layer_state(layerStates); // 1
-  render_space();
   render_modifiers(get_mods() | get_oneshot_mods()); // 4
   render_lock_state(host_keyboard_led_state()); // 3
 }
