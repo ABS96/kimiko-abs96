@@ -32,15 +32,8 @@ void capsword_toggle(void) {
 bool should_capsword_terminate(uint16_t keycode, const keyrecord_t *record) {
   switch (keycode) {
     case HU_0:
-    case HU_1:
-    case HU_2:
-    case HU_3:
-    case HU_4:
-    case HU_5:
-    case HU_6:
-    case HU_7:
-    case HU_8:
-    case HU_9:
+    case HU_1 ... HU_9:
+    case KC_KP_1 ... KC_KP_0:
     case KC_A ... KC_Z:
     case HU_AACU:
     case HU_EACU:
