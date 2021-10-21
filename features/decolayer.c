@@ -53,25 +53,27 @@ uint8_t get_hex_digit_kc(uint8_t digit) {
 }
 
 void tap_unicode_number(uint32_t number) {
-  int mag = -1;
+  int magnitude = -1;
   uint32_t shiftee = number;
+  // Check how many characters the number takes to write
   while (shiftee) {
     shiftee >>= 4;
-    ++mag;
+    ++magnitude;
   }
-  for (; mag >= 0; --mag) {
-    uint8_t digit = ((number >> (mag * 4)) & 0x0F);
+  // Type each hex digit
+  for (; magnitude >= 0; --magnitude) {
+    uint8_t digit = ((number >> (magnitude * 4)) & 0x0F);
     tap_code(get_hex_digit_kc(digit));
   }
 }
 
+// WinCompose implementation (see Unicode @ QMK Docs for other platforms)
 void compose_unicode(uint32_t number) {
   uint8_t saved_mods = get_mods();
   clear_mods();
 
   // Type [Compose] [u] [x] ... [x]  [Enter]
   tap_code(KC_RALT);
-  // wait_ms(10);
   tap_code(KC_U);
   tap_unicode_number(number);
   tap_code(KC_ENTER);
@@ -79,14 +81,14 @@ void compose_unicode(uint32_t number) {
   set_mods(saved_mods);
 }
 
-// See offsets_and_codepoints
 void compose_letter(uint32_t offset_and_cp, uint16_t keycode) {
   bool capital = (get_mods() & MOD_MASK_SHIFT) || host_keyboard_led_state().caps_lock;
   // QWERTZ correction
   if (keycode >= KC_Y) {
     keycode = keycode == KC_Z ? KC_Y : KC_Z;
   }
-  // A in the selected alphabed shifted by keycode, (a - A if capital)
+  // Start from "A" in the selected alphabet, go to the current letter, and add ("a" - "A") if capital
+  // See offsets_and_codepoints
   compose_unicode(
     (offset_and_cp & 0x00FFFFFF)
     + keycode - KC_A
@@ -94,6 +96,7 @@ void compose_letter(uint32_t offset_and_cp, uint16_t keycode) {
   );
 }
 
+// Change a letter with diacritics to one without, return the unicode number of its diacritic
 uint16_t handle_hungarian_accents(uint16_t* keycode) {
   switch (*keycode) {
     case HU_AACU:
