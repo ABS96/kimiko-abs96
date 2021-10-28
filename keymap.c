@@ -108,6 +108,7 @@ enum shell_navigation_states shell_nav_state = IDLE;
 #define TAB_PRV S(C(KC_TAB))
 #define WRD_NXT C(KC_RIGHT)
 #define WRD_PRV C(KC_LEFT)
+#define APP_ESC A(KC_F4)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -184,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │   °  │   ^  │   #  │   <  │   >  │   @  │╵Desk╵      ╵    ╵│      │      │      │ AltGr│      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │      │  ADJ ╷      │    │      │[LSYM]│      │      │      │
+ *               │Alt F4│      │      │  ADJ ╷      │    │      │[LSYM]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_LSYM] = LAYOUT(
@@ -192,7 +193,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
     HU_GRV,  HU_AACU, HU_EQL,  HU_LBRC, HU_RBRC, HU_QUOT,                   _______, HR_RSFT, HR_RCTL, HR_LALT, HR_RGUI, _______,
     HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   SN_DESK, _______, _______, _______, _______, HR_RALT, _______, _______,
-                      _______, _______, _______, LAY_ADJ, _______, _______, _______, _______, _______, _______
+                      APP_ESC, _______, _______, LAY_ADJ, _______, _______, _______, _______, _______, _______
 ),
 
 /* ADJUST (LMOD + RMOD) + double acutes
