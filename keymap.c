@@ -136,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │      │      │Insert│      │      │ WASD │                  │      │      │  MMB │PauBrk│      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │CapsLk│
+ * │      │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Wrd↔        Scl↔ │PrtScr┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃ ScrLk│
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Wrd↔        Scl↔ │PrtScr┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │ Word←│ Word→│ Tab← │ Tab→ │ Tab  │╵  ⇧ ╵      ╵    ╵│      │ Left │ Down │  Up  │ Right│      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
@@ -147,8 +147,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_NAVIGATION] = LAYOUT(
     _______, _______, KC_INS,  _______, _______, LAY_ASD,                     _______, _______, KC_BTN3, KC_PAUS, _______, _______,
-    _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, KC_CLCK,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_PSCR, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, KC_SLCK,
+    _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, _______,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_PSCR, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,   KC_LSFT, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
                       _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
 ),
@@ -197,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │ RESET│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │      │      │      │      │EEPRST│
+ * │ RESET│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │ NumLk│CapsLk│ScrlLk│      │EEPRST│
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │      │                  │      │   Ű  │ Play │   Ő  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
@@ -209,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_ADJUST] = LAYOUT(
-    RESET,   FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,
+    RESET,   FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, KC_NLCK, KC_CLCK, KC_SCLK, XXXXXXX, EEP_RST,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, KC_MPLY, HU_ODAC, XXXXXXX, XXXXXXX,
     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
     XXXXXXX, XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
@@ -218,7 +218,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* NAVIGATION / KEYPAD
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │      │      │Insert│      │      │      │                  │      │ NumLk│ KP / │ KP * │ KP - │      │
+ * │      │      │Insert│      │      │      │                  │      │      │ KP / │ KP * │ KP - │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │ PgUp │ Home │  Up  │ End  │Delete│                  │      │ KP 4 │ KP 5 │ KP 6 │ KP + │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
@@ -230,7 +230,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_NVKP] = LAYOUT(
-    _______, _______, KC_INS,  _______, _______, _______,                   _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______,
+    _______, _______, KC_INS,  _______, _______, _______,                   _______, _______, KC_PSLS, KC_PAST, KC_PMNS, _______,
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,                    _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
     _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,                    KC_PDOT, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,  KC_LSFT, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
