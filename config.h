@@ -30,10 +30,14 @@
 #define OLED_FONT_END 223
 
 #ifdef RGBLIGHT_ENABLE
+#define RGBLIGHT_SPLIT
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
-#define RGBLIGHT_SLEEP /* the RGB lighting will be switched off when the host goes to sleep */
+#define RGBLIGHT_DEFAULT_HUE 4 // yellow
+#define RGBLIGHT_DEFAULT_VAL RGBLIGHT_LIMIT_VAL
+#define RGBLIGHT_SLEEP            // the RGB lighting will be switched off when the host goes to sleep
+#define RGBLIGHT_DISABLE_KEYCODES // redefine RGB_XXX keycodes to avoid EEPROM writes
 /*== all animations enable ==*/
 // #define RGBLIGHT_ANIMATIONS
 /*== or choose animations to save space ==*/

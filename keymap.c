@@ -53,6 +53,8 @@ enum custom_keycodes {
     HR_RALT,
     HR_RGUI,
 
+    SN_DESK,
+
     CAPSWRD,
     FULWDTH,
     MATHBLD,
@@ -72,6 +74,26 @@ uint16_t hrm_keycodes[] = {
     KC_RGUI
 };
 uint16_t hrm_count = 0;
+
+/* Shell navigation
+ *
+ * Switching windows:
+ * 1. Hold the right thumb key (LSYM)
+ * 2. Rotate the left encoder to select a window
+ * 3. Release the right thumb key to switch to the selected window
+ * 
+ * Switching desktops:
+ * 1. Hold the right thumb key (LSYM)
+ * 2. Press the left encoder to enter desktop selection mode
+ * 3. Rotate the left encoder to select a desktop
+ * 4. Release the right thumb key to leave the mode
+ */
+enum shell_navigation_states {
+    IDLE,
+    SWITCH_WINDOW,
+    SWITCH_DESKTOP
+};
+enum shell_navigation_states shell_nav_state = IDLE;
 
 #define LAY_BAS TO(_QWERTZ)
 #define LAY_RSM MO(_RSYM)
@@ -136,8 +158,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │      │      │      │      │      │                  │   $  │   Ü  │   !  │   Ö  │   +  │   -  │
- * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ Work-       RGB  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃   ◆  ┃   ⌥  ┃   ⎈  ┃   ⇧  ┃      │ spc↔        hue↔ │   "  ┃   (  ┃   )  ┃   ;  ┃Delete┃   _  │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │      ┃   ◆  ┃   ⌥  ┃   ⎈  ┃   ⇧  ┃      │ val↕        Tab↔ │   "  ┃   (  ┃   )  ┃   ;  ┃Delete┃   _  │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │      │      │      │      │      │╵    ╵      ╵    ╵│   ~  │   {  │   }  │   %  │   *  │   :  │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
@@ -157,10 +179,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │  F12 │  F1  │  F2  │  F3  │  F4  │  F5  │                  │  F6  │  F7  │  F8  │  F9  │ F10  │ F11  │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │      │   \  │   |  │   É  │   /  │   &  │                  │      │   Ú  │   Í  │   Ó  │      │      │
- * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │   `  ┃   Á  ┃   =  ┃   [  ┃   ]  ┃   '  │ val↕        Tab↔ │      ┃   ⇧  ┃   ⎈  ┃   ⌥  ┃   ◆  ┃      │
+ * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ Shell       RGB  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
+ * │   `  ┃   Á  ┃   =  ┃   [  ┃   ]  ┃   '  │ nav↔        hue↔ │      ┃   ⇧  ┃   ⎈  ┃   ⌥  ┃   ◆  ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │   °  │   ^  │   #  │   <  │   >  │   @  │╵    ╵      ╵    ╵│      │      │      │ AltGr│      │      │
+ * │   °  │   ^  │   #  │   <  │   >  │   @  │╵Desk╵      ╵    ╵│      │      │      │ AltGr│      │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │  ADJ ╷      │    │      │[LSYM]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
@@ -169,25 +191,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
     _______, HU_BSLS, HU_PIPE, HU_EACU, HU_SLSH, HU_AMPR,                   _______, HU_UACU, HU_IACU, HU_OACU, _______, _______,
     HU_GRV,  HU_AACU, HU_EQL,  HU_LBRC, HU_RBRC, HU_QUOT,                   _______, HR_RSFT, HR_RCTL, HR_LALT, HR_RGUI, _______,
-    HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   _______, _______, _______, _______, _______, HR_RALT, _______, _______,
+    HU_RNGA, HU_CIRC, HU_HASH, HU_LABK, HU_RABK, HU_AT,   SN_DESK, _______, _______, _______, _______, HR_RALT, _______, _______,
                       _______, _______, _______, LAY_ADJ, _______, _______, _______, _______, _______, _______
 ),
 
 /* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │ RESET│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │      │      │      │      │      │
+ * │ RESET│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │      │      │      │      │EEPRST│
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │      │                  │      │   Ű  │ Play │   Ő  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
  * │ MODE ┃ HUE- ┃ SAT- ┃ VAL- ┃ BRI+ ┃      │ Spd↕             │      ┃ Prev ┃ VOL- ┃ VOL+ ┃ Next ┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
- * │ DEBUG│      │ Wake │ Sleep│      │      │╵    ╵      ╵    ╵│      │ Rwnd │ Mute │ Stop │ Ffwd │      │
+ * │      │      │ Wake │ Sleep│      │      │╵    ╵      ╵    ╵│      │ Rwnd │ Mute │ Stop │ Ffwd │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
  *               │      │      │      │ [ADJ]╷      │    │      │ [ADJ]│      │      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_ADJUST] = LAYOUT(
-    RESET,   FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    RESET,   FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, KC_MPLY, HU_ODAC, XXXXXXX, XXXXXXX,
     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
     XXXXXXX, XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
@@ -204,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │ Word←│ Word→│ Tab← │ Tab→ │ Tab  │╵  ⇧ ╵      ╵    ╵│      │ KP 7 │ KP 8 │ KP 9 │ KP ⏎ │      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
- *               │      │      │[NVKP]│      ╷      │    │      │      │[NVKP]│      │      │
+ *               │      │      │[NVKP]│      ╷      │    │  Esc │      │[NVKP]│      │      │
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_NVKP] = LAYOUT(
@@ -212,7 +234,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,                    _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______,
     _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,                    KC_PDOT, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,  KC_LSFT, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, KC_PENT, _______,
-                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+                      _______, _______, _______, _______, _______, KC_ESC,  _______, _______, _______, _______
 ),
 
 [_LMOD] = LAYOUT(
@@ -226,7 +248,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                   _______, HR_RSFT, HR_RCTL, HR_LALT, HR_RGUI, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, HR_RALT, _______, _______,
+    _______, _______, _______, _______, _______, _______, SN_DESK, _______, _______, _______, _______, HR_RALT, _______, _______,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -291,11 +313,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
+        // Shell navigation
+        case LAY_LSM:
+            if (!record->event.pressed) {
+                switch (shell_nav_state) {
+                    case SWITCH_WINDOW:
+                        unregister_code(KC_LALT);
+                    case SWITCH_DESKTOP:
+                        shell_nav_state = IDLE;
+                    break;
+                    default:
+                        break;
+                }
+            }
+            return true;
+        case SN_DESK:
+            if (record->event.pressed) {
+                if (shell_nav_state == IDLE)
+                    shell_nav_state = SWITCH_DESKTOP;
+            }
+            return false;
+
+        // Capsword
         case CAPSWRD:
             if (record->event.pressed) {
                 capsword_toggle();
             }
             return false;
+
+        // Decorative layers
         case FULWDTH:
             if (record->event.pressed) {
                 deco_on(DECO_FULLWIDTH);
@@ -321,6 +367,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 deco_on(DECO_SANSBOIT);
             }
             return false;
+        
+        // RGB (without EEPROM)
+        case RGB_TOG:
+            if (record->event.pressed)
+                rgblight_toggle_noeeprom();
+            return false;
+        case RGB_MOD:
+            if (record->event.pressed)
+                rgblight_step_noeeprom();
+            return false;
+        case RGB_HUI:
+            if (record->event.pressed)
+                rgblight_increase_hue_noeeprom();
+            return false;
+        case RGB_HUD:
+            if (record->event.pressed)
+                rgblight_decrease_hue_noeeprom();
+            return false;
+        case RGB_SAI:
+            if (record->event.pressed)
+                rgblight_increase_sat_noeeprom();
+            return false;
+        case RGB_SAD:
+            if (record->event.pressed)
+                rgblight_decrease_sat_noeeprom();
+            return false;
+        case RGB_VAI:
+            if (record->event.pressed)
+                rgblight_increase_val_noeeprom();
+            return false;
+        case RGB_VAD:
+            if (record->event.pressed)
+                rgblight_decrease_val_noeeprom();
+            return false;
     }
 
     if (!process_capsword(keycode, record))
@@ -330,6 +410,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
 
     return true;
+}
+
+void keyboard_post_init_user(void) {
+#ifdef RGBLIGHT_ENABLE
+    rgblight_disable_noeeprom();
+#endif
 }
 
 #ifdef OLED_DRIVER_ENABLE
@@ -366,42 +452,54 @@ void oled_task_user(void) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    // Left encoder
+    // Left encoder (here, clockwise is !clockwise)
     if (index == 0) {
         switch (get_highest_layer(layer_state)) {
             case _QWERTZ:
-                // Mouse scroll Up/Down
-                if (clockwise) tap_code(KC_WH_U); else tap_code(KC_WH_D);
+                // Mouse scroll ↔
+                if (!clockwise) tap_code(KC_WH_D); else tap_code(KC_WH_U);
                 break;
 
             case _NAVIGATION:
             case _NVKP:
-                // Scroll by Word
-                if (clockwise) tap_code16(LCTL(KC_LEFT)); else tap_code16(LCTL(KC_RGHT));
+                // Scroll by Word ↔
+                if (!clockwise) tap_code16(LCTL(KC_RGHT)); else tap_code16(LCTL(KC_LEFT));
                 break;
 
 
             // Right thumb key
             case _LSYM:
-            case _RMOD:
-                // Switch workspace
-                if (clockwise) {
-                    tap_code16(LCTL(LGUI(KC_LEFT)));
-                } else {
-                    tap_code16(LCTL(LGUI(KC_RIGHT)));
+                // Shell navigation
+                switch (shell_nav_state) {
+                    case IDLE:
+                        shell_nav_state = SWITCH_WINDOW;
+                        register_code(KC_LALT);
+                        tap_code(KC_TAB);
+                        break;
+                    case SWITCH_WINDOW:
+                        if (!clockwise)
+                            tap_code(KC_TAB);
+                        else
+                            tap_code16(LSFT(KC_TAB));
+                        break;
+                    case SWITCH_DESKTOP:
+                        if (!clockwise)
+                            tap_code16(LCTL(LGUI(KC_RGHT)));
+                        else
+                            tap_code16(LCTL(LGUI(KC_LEFT)));
+                        break;
                 }
                 break;
 
             // Left thumb key
             case _RSYM:
-            case _LMOD:
                 // RGB brightness ↕
-                if (clockwise) rgblight_decrease_val(); else rgblight_increase_val();
+                if (!clockwise) rgblight_increase_val(); else rgblight_decrease_val();
                 break;
             
             case _ADJUST:
                 // RGB speed ↕
-                if (clockwise) rgblight_decrease_speed(); else rgblight_increase_speed();
+                if (!clockwise) rgblight_increase_speed(); else rgblight_decrease_speed();
                 break;
         }
     }
