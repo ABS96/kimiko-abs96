@@ -54,6 +54,13 @@
 // #define RGBLIGHT_EFFECT_TWINKLE // random keys
 #endif
 
+#ifdef MOUSEKEY_ENABLE
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_DELAY 0
+#define MOUSEKEY_TIME_TO_MAX 60
+#define MOUSEKEY_MAX_SPEED 7
+#endif
+
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
