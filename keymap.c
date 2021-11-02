@@ -138,9 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
  * │      │      │Insert│      │      │ WASD │                  │      │      │  MMB │PauBrk│      │      │
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
- * │  ⎈+W │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │      │
+ * │  ⎈+W │ PgUp │ Home │  Up  │ End  │      │                  │      │  LMB │ M  ↑ │  RMB │  MB4 │  MB5 │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤                  ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
- * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Wrd↔        Scl↔ │PrtScr┃ M  ← ┃ M  ↓ ┃ M  → ┃  MB5 ┃      │
+ * │      ┃ PgDn ┃ Left ┃ Down ┃ Right┃      │ Wrd↔        Scl↔ │PrtScr┃ M  ← ┃ M  ↓ ┃ M  → ┃Speed+┃      │
  * ├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤╭┄┄┄┄╮      ╭┄┄┄┄╮├──────╄━━━━━━╇━━━━━━╇━━━━━━╇━━━━━━╃──────┤
  * │      │ Word←│ Word→│ Tab← │ Tab→ │ Tab  │╵  ⇧ ╵      ╵    ╵│      │ Left │ Down │  Up  │ Right│      │
  * └──────┴──────┼──────┼──────┼──────┼──────┘╶─────┐    ┌─────╴└──────┼──────┼──────┼──────┼──────┴──────┘
@@ -149,8 +149,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_NAVIGATION] = LAYOUT(
     _______, _______, KC_INS,  _______, _______, LAY_ASD,                     _______, _______, KC_BTN3, KC_PAUS, _______, _______,
-    TAB_CLS, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, _______,
-    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_PSCR, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5, _______,
+    TAB_CLS, KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______,                     _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN4, KC_BTN5,
+    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______,                     KC_PSCR, KC_MS_L, KC_MS_D, KC_MS_R, KC_ACL2, _______,
     _______, WRD_PRV, WRD_NXT, TAB_PRV, TAB_NXT, KC_TAB,   KC_LSFT, _______,  _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
                       _______, _______, _______, _______,  _______, _______,  _______, _______, _______, _______
 ),
