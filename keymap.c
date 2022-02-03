@@ -422,7 +422,7 @@ void keyboard_post_init_user(void) {
 #endif
 }
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 void suspend_power_down_user() {
     oled_off();
 }
@@ -435,7 +435,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     }
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         char layerStates = {
             IS_LAYER_ON(_NAVIGATION)  |
@@ -451,8 +451,9 @@ void oled_task_user(void) {
     } else {
         render_status_secondary();
     }
+    return false;
 }
-#endif // OLED_DRIVER_ENABLE
+#endif // OLED_ENABLE
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
