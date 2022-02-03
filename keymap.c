@@ -20,6 +20,7 @@
 #ifndef __INTELLISENSE__
 #include QMK_KEYBOARD_H
 #endif
+// #include <transactions.h>
 #include "keymap_hungarian.h"
 #include "features/oled.h"
 #include "features/capsword.h"
@@ -420,6 +421,10 @@ void keyboard_post_init_user(void) {
 #ifdef RGBLIGHT_ENABLE
     rgblight_disable_noeeprom();
 #endif
+    // Split communication for HID display
+    if (is_keyboard_master()) {
+        transaction_register_rpc(USER_SYNC_DISPLAY, user_sync_display_handler);
+    }
 }
 
 #ifdef OLED_ENABLE
@@ -540,3 +545,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif // ENCODER_ENABLE
+
+void housekeeping_task_user(void) {
+    static uint32_t last_sync = 0;
+    static int test = 0;
+    if (is_keyboard_master()) {
+        if (timer_elapsed32(last_sync) > 500) {
+            if (transaction_rpc_send(USER_SYNC_DISPLAY, sizeof(test), &test)) {
+                last_sync = timer_read32();
+                test = (test + 1) % 10;
+            }
+        }
+    }
+}

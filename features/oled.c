@@ -2,6 +2,18 @@
 #include "capsword.h"
 #include "decolayer.h"
 
+// Split communication
+
+typedef struct _master_to_slave_t {
+  int m2s_data;
+} master_to_slave_t;
+
+uint8_t sync_data = 0;
+void user_sync_display_handler(uint8_t in_buflen, const void* in_data) {
+  const master_to_slave_t *m2s = (const master_to_slave_t*)in_data;
+  sync_data = m2s->m2s_data;
+}
+
 void render_space(void) {
   oled_write_P(PSTR("     "), false);
 }
@@ -256,5 +268,7 @@ void render_status_primary(char layerStates) {
 }
 
 void render_status_secondary(void) {
+    const char test_data = '0' + sync_data;
     render_logo();
+    oled_write(&test_data, false);
 }
