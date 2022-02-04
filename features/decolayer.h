@@ -2,8 +2,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_hungarian.h"
 
-enum decolayer_state
-{
+enum decolayer_state {
   DECO_OFF = 0,
   DECO_FULLWIDTH,
   DECO_MATHBOLD,

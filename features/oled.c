@@ -4,12 +4,9 @@
 
 // Split communication
 
-typedef struct _master_to_slave_t {
-  int m2s_data;
-} master_to_slave_t;
-
 uint8_t sync_data = 0;
-void user_sync_display_handler(uint8_t in_buflen, const void* in_data) {
+
+void user_sync_display_handler(uint8_t in_buflen, const void* in_data, uint8_t out_buflen, void* out_data) {
   const master_to_slave_t *m2s = (const master_to_slave_t*)in_data;
   sync_data = m2s->m2s_data;
 }

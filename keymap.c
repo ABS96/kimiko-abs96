@@ -20,7 +20,7 @@
 #ifndef __INTELLISENSE__
 #include QMK_KEYBOARD_H
 #endif
-// #include <transactions.h>
+#include <transactions.h>
 #include "keymap_hungarian.h"
 #include "features/oled.h"
 #include "features/capsword.h"
@@ -547,9 +547,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif // ENCODER_ENABLE
 
 void housekeeping_task_user(void) {
-    static uint32_t last_sync = 0;
-    static int test = 0;
     if (is_keyboard_master()) {
+        static uint32_t last_sync = 0;
+        static int test = 0;
         if (timer_elapsed32(last_sync) > 500) {
             if (transaction_rpc_send(USER_SYNC_DISPLAY, sizeof(test), &test)) {
                 last_sync = timer_read32();
