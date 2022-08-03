@@ -1,5 +1,6 @@
 /* Copyright 2019 MechMerlin
  * Copyright 2020 @ben_roe (keycapsss.com)
+ * Copyright 2021 @ABS96 (antokben.hu)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,10 +18,13 @@
 
 #pragma once
 
-/* Select hand configuration */
+/* Split functionality */
+
 // #define MASTER_LEFT
 // #define MASTER_RIGHT
 #define EE_HANDS
+
+/* Display */
 
 #define OLED_FONT_H "keyboards/keycapsss/kimiko/keymaps/ABS96/glcdfont.c"
 // #define OLED_FONT_WIDTH 5
@@ -28,6 +32,8 @@
 #define OLED_BRIGHTNESS 100 // 0-255
 #define OLED_FONT_START 0
 #define OLED_FONT_END 223
+
+/* Key lighting */
 
 #ifdef RGBLIGHT_ENABLE
 #define RGBLIGHT_SPLIT
@@ -38,9 +44,8 @@
 #define RGBLIGHT_DEFAULT_VAL RGBLIGHT_LIMIT_VAL
 #define RGBLIGHT_SLEEP            // the RGB lighting will be switched off when the host goes to sleep
 #define RGBLIGHT_DISABLE_KEYCODES // redefine RGB_XXX keycodes to avoid EEPROM writes
-/*== all animations enable ==*/
-// #define RGBLIGHT_ANIMATIONS
-/*== or choose animations to save space ==*/
+
+// #define RGBLIGHT_ANIMATIONS // enables all animations
 #define RGBLIGHT_EFFECT_STATIC
 #define RGBLIGHT_EFFECT_STATIC_GRADIENT
 // #define RGBLIGHT_EFFECT_ALTERNATING // left-right
@@ -54,6 +59,8 @@
 // #define RGBLIGHT_EFFECT_TWINKLE // random keys
 #endif
 
+/* Mouse input simulation */
+
 #ifdef MOUSEKEY_ENABLE
 #define MK_COMBINED
 #define MOUSEKEY_INTERVAL 16
@@ -62,9 +69,17 @@
 #define MOUSEKEY_MAX_SPEED 7
 #endif
 
+/* Hardware-specific */
+
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
 
 // #undef DEBOUNCE
 // #define DEBOUNCE 55
+
+/* Reduce firmware size */
+
+#define NO_ACTION_ONESHOT  // one-shot modifiers
+#define NO_ACTION_MACRO    // old-style macros
+#define NO_ACTION_FUNCTION // old-style functions
