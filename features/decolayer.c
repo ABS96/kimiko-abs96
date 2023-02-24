@@ -135,7 +135,7 @@ bool process_decolayer(uint16_t keycode, const keyrecord_t *record) {
   if (get_deco_state() != DECO_OFF && record->event.pressed) {
     // Ignore mods and special keys
     if (
-      ((get_mods() | get_oneshot_mods()) & (MOD_MASK_CAG)) ||
+      (get_mods() & (MOD_MASK_CAG)) ||
       (QK_LAYER_TAP <= keycode && keycode <= QK_ONE_SHOT_LAYER_MAX)
     )
       return true;

@@ -251,7 +251,7 @@ void render_status_primary(char layerStates) {
   render_deco_layer_state();
   render_layer_state(layerStates); // 2
   render_mod_layer_state(layerStates); // 1
-  render_modifiers(get_mods() | get_oneshot_mods()); // 4
+  render_modifiers(get_mods()); // 4
   render_lock_state(host_keyboard_led_state()); // 3
 }
 
