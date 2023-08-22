@@ -201,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ADJUST (LMOD + RMOD) + double acutes
  * ┌──────┬──────┬──────┬──────┬──────┬──────┐                  ┌──────┬──────┬──────┬──────┬──────┬──────┐
- * │ RESET│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │ NumLk│CapsLk│ScrlLk│PauBrk│EEPRST│
+ * │ BTLDR│FLWDTH│MTHBLD│SANSBD│SANSIT│SANSBI│                  │      │ NumLk│CapsLk│ScrlLk│PauBrk│EE CLR│
  * ├──────┼──────┼──────┼──────┼──────┼──────┤                  ├──────┼──────┼──────┼──────┼──────┼──────┤
  * │RGB ON│ HUE+ │ SAT+ │ VAL+ │ BRI- │      │                  │      │   Ű  │ Play │   Ő  │      │      │
  * ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤ RGB              ├──────╆━━━━━━╈━━━━━━╈━━━━━━╈━━━━━━╅──────┤
@@ -213,7 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               └──────┴──────┴──────┘╶─────┴──────┘    └──────┴─────╴└──────┴──────┴──────┘
  */
 [_ADJUST] = LAYOUT(
-    RESET,   FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, KC_NLCK, KC_CLCK, KC_SLCK, KC_PAUS, EEP_RST,
+    QK_BOOT, FULWDTH, MATHBLD, SANSBLD, SANSITL, SANSBIT,                   XXXXXXX, KC_NUM,  KC_CAPS, KC_SCRL, KC_PAUS, EE_CLR,
     RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, KC_BRIU, XXXXXXX,                   XXXXXXX, HU_UDAC, KC_MPLY, HU_ODAC, XXXXXXX, XXXXXXX,
     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, KC_BRID, XXXXXXX,                   XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
     XXXXXXX, XXXXXXX, KC_WAKE, KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MRWD, KC_MUTE, KC_MSTP, KC_MFFD, XXXXXXX,
